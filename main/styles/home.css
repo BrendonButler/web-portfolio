@@ -1,0 +1,197 @@
+/* fonts */
+/* @import url(https://fonts.googleapis.com/css?family=Ubuntu:400,700|Roboto:400,300); */
+
+/*
+* general
+*/
+
+html, body {
+  min-width: 260px;
+  max-width: 100%;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  background: rgb(240, 240, 240);
+  color: rgb(40, 40, 40);
+}
+
+.left {
+  float: left;
+}
+
+.center {
+  width: auto;
+  margin: auto;
+}
+
+.right {
+  float: right;
+}
+
+
+/*
+* header
+*/
+
+header {
+  width: 80%;
+  padding: 20px 10%;
+  background: rgb(180, 180, 180);
+  background-image: linear-gradient(
+    120deg, 
+    rgb(25, 135, 180),
+    rgb(26, 148, 88)
+  );
+  color: rgb(255, 255, 255);
+}
+
+header #profile-image {
+  width: 100px;
+  height: 100px;
+  display: block;
+  margin: auto;
+  border: 3px solid white;
+  border-radius: 50%;
+  transition: all .5s;
+}
+
+header #profile-image:hover {
+  transform: scale(1.2) rotate(5deg);
+}
+
+header h1 {
+  font-family: 'Ubuntu', sans-serif;
+  font-size: 1.75em;
+  font-weight: 700;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+header p {
+  margin: 1em 0 0 0;
+  font-family: 'Roboto', sans-serif;
+  font-size: 0.9em;
+  font-weight: 400;
+  text-align: center;
+  opacity: 0.8;
+}
+
+header hr {
+  width: 50%;
+  opacity: 0.8;
+}
+
+
+/*
+* content
+*/
+
+section:nth-child(even) {
+  background: rgb(245, 245, 245);
+}
+
+.navigate {
+  padding: 20px 10%;
+  font-family: 'Roboto', sans-serif;
+  text-align: center;
+}
+
+.navigate h2 {
+  margin-top: 0;
+}
+
+.navigate ul {
+  margin: auto;
+  padding: 0;
+  list-style-type: none;
+  text-align: center;
+}
+
+.navigate li {
+  display: list-item;
+}
+
+.navigate a {
+  margin: 10px 5px;
+  padding: 6px 12px;
+  display: block;
+  background: rgba(133, 133, 133, 0.1);
+  color: rgba(17, 95, 126, 1);
+  border: solid rgba(133, 133, 133, 0.2) 1px;
+  border-radius: 5px;
+  font-size: 0.95em;
+  font-weight: 400;
+  text-decoration: none;
+  transition: color 0.2s, background-color 0.2s, border-color 0.2s;
+}
+
+.navigate a:hover {
+  background: rgba(133, 133, 133, 0.2);
+  color: rgba(17, 95, 126, 1.0);
+}
+
+
+/**
+* RESPONSIVE
+**/
+
+/* smartphones */
+@media screen and (min-width: 425px) {
+  .navigate li {
+    display: inline-block;
+  }
+
+  .navigate a {
+    padding: 12px 18px;
+    display: block;
+  }
+}
+
+/* tablets/laptops */
+@media screen and (min-width: 700px) {
+  header {
+    padding: 40px 10%;
+  }
+  
+  header #profile-image {
+    width: 125px;
+    height: 125px;
+  }
+  
+  header h1 {
+    font-size: 2em;
+  }
+  
+  header hr {
+    width: 40%;
+  }
+  
+  .navigate a {
+    margin: 0 10px;
+    padding: 12px 18px;
+  }
+}
+
+/* desktop */
+@media screen and (min-width: 1000px) {
+  header hr {
+    width: 30%;
+  }
+}
+
+/* ultrawide */
+@media screen and (min-width: 2160px) {
+
+}
+
+/* UHD/4K */
+@media screen and (min-width: 3840px) {
+
+}
+
+/* UHDx2/8k */
+@media screen and (min-width: 7680px) {
+
+}
