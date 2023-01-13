@@ -6,7 +6,7 @@
 */
 
 html, body {
-  min-width: 260px;
+  min-width: 400px;
   max-width: 100%;
   width: 100%;
   height: 100%;
@@ -37,19 +37,14 @@ html, body {
 
 header {
   width: 80%;
-  padding: 20px 10%;
-  background: rgb(180, 180, 180);
-  background-image: linear-gradient(
-    120deg, 
-    rgb(25, 135, 180),
-    rgb(26, 148, 88)
-  );
+  padding: clamp(20px, 8vw, 40px) 10%;
+  background: rgb(180, 180, 180) linear-gradient(120deg, rgb(25, 175, 180), rgb(148, 26, 142));
   color: rgb(255, 255, 255);
 }
 
 header #profile-image {
-  width: 100px;
-  height: 100px;
+  width: clamp(125px, 11vw, 200px);
+  height: clamp(125px, 11vw, 200px);
   display: block;
   margin: auto;
   border: 3px solid white;
@@ -63,7 +58,7 @@ header #profile-image:hover {
 
 header h1 {
   font-family: 'Ubuntu', sans-serif;
-  font-size: 1.75em;
+  font-size: clamp(25px, 2.5vw, 40px);
   font-weight: 700;
   text-align: center;
   text-transform: uppercase;
@@ -79,7 +74,7 @@ header p {
 }
 
 header hr {
-  width: 50%;
+  width: clamp(200px, 18vw, 325px);
   opacity: 0.8;
 }
 
@@ -110,12 +105,12 @@ section:nth-child(even) {
 }
 
 .navigate li {
-  display: list-item;
+  display: inline-block;
 }
 
 .navigate a {
-  margin: 10px 5px;
-  padding: 6px 12px;
+  margin: 8px 7px;
+  padding: 12px 14px;
   display: block;
   background: rgba(133, 133, 133, 0.1);
   color: rgba(17, 95, 126, 1);
@@ -130,68 +125,4 @@ section:nth-child(even) {
 .navigate a:hover {
   background: rgba(133, 133, 133, 0.2);
   color: rgba(17, 95, 126, 1.0);
-}
-
-
-/**
-* RESPONSIVE
-**/
-
-/* smartphones */
-@media screen and (min-width: 425px) {
-  .navigate li {
-    display: inline-block;
-  }
-
-  .navigate a {
-    padding: 12px 18px;
-    display: block;
-  }
-}
-
-/* tablets/laptops */
-@media screen and (min-width: 700px) {
-  header {
-    padding: 40px 10%;
-  }
-  
-  header #profile-image {
-    width: 125px;
-    height: 125px;
-  }
-  
-  header h1 {
-    font-size: 2em;
-  }
-  
-  header hr {
-    width: 40%;
-  }
-  
-  .navigate a {
-    margin: 0 10px;
-    padding: 12px 18px;
-  }
-}
-
-/* desktop */
-@media screen and (min-width: 1000px) {
-  header hr {
-    width: 30%;
-  }
-}
-
-/* ultrawide */
-@media screen and (min-width: 2160px) {
-
-}
-
-/* UHD/4K */
-@media screen and (min-width: 3840px) {
-
-}
-
-/* UHDx2/8k */
-@media screen and (min-width: 7680px) {
-
 }
