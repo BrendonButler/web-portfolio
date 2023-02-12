@@ -1,0 +1,198 @@
+/* fonts */
+/* @import url(https://fonts.googleapis.com/css?family=Ubuntu:400,700|Roboto:400,300); */
+
+/*
+* general
+*/
+
+html, body {
+  min-width: 260px;
+  max-width: 100%;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  background: rgb(240, 240, 240);
+  color: rgb(40, 40, 40);
+}
+
+.left {
+  float: left;
+}
+
+.center {
+  width: auto;
+  margin: auto;
+}
+
+.right {
+  float: right;
+}
+
+
+/*
+* header
+*/
+
+header {
+  width: 80%;
+  padding: 20px 10%;
+  background: rgb(180, 180, 180);
+  background-image: linear-gradient(
+    120deg, 
+    rgb(25, 135, 180),
+    rgb(26, 148, 88)
+  );
+  color: rgb(255, 255, 255);
+}
+
+header h1 {
+  margin: .25em 0;
+  font-family: 'Ubuntu', sans-serif;
+  font-size: 1.75em;
+  font-weight: 700;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+header ul {
+  margin: 0;
+  width: 100%;
+  padding: 0;
+  text-align: center;
+  list-style-type: none;
+  overflow: hidden;
+}
+
+header li {
+  display: inline;
+}
+
+header a {
+  margin: 1em .2em;
+  font-family: 'Roboto', sans-serif;
+  font-size: 1.1em;
+  font-weight: 400;
+  text-align: center;
+  text-decoration: none;
+  color: rgb(255, 255, 255);
+  opacity: 0.8;
+}
+
+header a:hover {
+  color: rgb(230, 230, 230);
+}
+
+header hr {
+  width: 75%;
+  opacity: 0.8;
+}
+
+
+/*
+* projects
+*/
+.project {
+  height: auto;
+  padding: 15px 10px;
+  clear: both;
+  overflow: hidden;
+}
+
+.project:nth-child(odd) {
+  background: rgb(245, 245, 245);
+}
+
+.project a {
+  color: rgb(0, 0, 0);
+}
+
+.project .img-left {
+  width: 100%;
+  float: left;
+  overflow: hidden;
+}
+
+.project .img-left a {
+  margin: 0 auto;
+  width: 150px;
+  overflow: hidden;
+  display: block;
+}
+
+.project img {
+  width: 150px;
+  height: 150px;    
+  float: left;
+}
+
+.project .desc {
+  width: 100%;
+  float: left;
+}
+
+.project .desc h2 {
+  margin: 0 0 5px 0;
+  padding: 0;
+  text-align: center;
+}
+
+.project .desc h2 a {
+  text-decoration: none;
+}
+
+.project .desc p {
+  margin: 0;
+  padding: 0;
+  text-align: center;
+}
+
+
+/**
+* RESPONSIVE
+**/
+
+/* tablets/laptops */
+@media screen and (min-width: 768px) {
+  header hr {
+    width: 50%;
+  }
+
+  .project {
+    padding: 5px 10px;
+  }
+
+  .project .img-left {
+    width: 100px;
+  }
+
+  .project .img-left a {
+    margin: 0;
+    width: 100px;
+  }
+
+  .project img {
+    width: 100px;
+    height: 100px;
+  }
+
+  .project .desc {
+    margin: 22.5px 0px 0 20px;
+    width: auto;
+  }
+
+  .project .desc h2 {
+    text-align: left;
+  }
+
+  .project .desc p {
+    text-align: left;
+  }
+}
+
+@media screen and (min-width: 900px) {
+  .project {
+    padding: 15px 10%;
+  }
+}

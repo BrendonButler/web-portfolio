@@ -1,0 +1,13 @@
+User-Agent: Googlebot
+Disallow: /styles/
+
+User-Agent: Slurp
+Disallow: /styles/
+
+User-Agent: bingbot
+Disallow: /styles/
+
+User-Agent: *
+Disallow: /styles/
+
+sitemap: http://code.sparkzz.net/sitemap.xml
