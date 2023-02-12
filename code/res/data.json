@@ -1,1 +1,48 @@
-{"modest":{"human_name":"Modest","type":"java","version":"1.0","description":"A simplistic, yet powerful API made to drive console based games and applications. ModestAPI is still in early development so there may be bugs that need to be sorted out and features to be implemented.","developers":[{"name":"Brendon Butler","contribution":"Lead Developer","github":"BrendonButler"},{"name":"Kaleb Haslam","contribution":"Developer","github":"hhaslam11"}],"license":{"name":"MIT License","link":"https:\/\/github.com\/BrendonButler\/ModestAPI\/blob\/master\/LICENSE.md"},"created":"Mar 28, 2016","updated":"Sept 15, 2016","download":"http:\/\/dl.sparkzz.net\/java\/modest\/modest.jar","downloads":286,"source":"https:\/\/github.com\/BrendonButler\/ModestAPI","api":true,"dependency_info":"http:\/\/repo.sparkzz.net\/modest\/dependency-info.html"},"visionless":{"human_name":"Visionless","type":"java","version":"0.1","description":"A RPG-esque game using my <a href='modestapi\/'>ModestAPI<\/a> engine. My plan is to evolve this game to 2D, then 3D when and if I evolve <a href='modestapi\/'>ModestAPI<\/a> to 2D and 3D. Visionless is mainly to be used to test features of <a href='modestapi\/'>ModestAPI<\/a> as well as find bugs, and etc.","developers":[{"name":"Brendon Butler","contribution":"Lead Developer","github":"BrendonButler"}],"license":{"name":"MIT License","link":"https:\/\/github.com\/BrendonButler\/Visionless\/blob\/master\/LICENSE.md"},"created":"Mar 23, 2016","updated":"Oct 12, 2016","download":"http:\/\/dl.sparkzz.net\/java\/visionless\/visionless.jar","downloads":263,"source":"https:\/\/github.com\/BrendonButler\/Visionless"},"":{"downloads":88},"modest,'\"QnoVale":{"downloads":1}}
+{
+    "modest": {
+        "human_name": "Modest",
+        "type": "java",
+        "version": "1.0",
+        "description": "A simplistic, yet powerful API made to drive console based games and applications. ModestAPI is still in early development so there may be bugs that need to be sorted out and features to be implemented.",
+        "developers": [{
+            "name": "Brendon Butler",
+            "contribution": "Lead Developer",
+            "github": "BrendonButler"
+        }, {
+            "name": "Kaleb Haslam",
+            "contribution": "Developer",
+            "github": "hhaslam11"
+        }],
+        "license": {
+            "name": "MIT License",
+            "link": "https:\/\/github.com\/BrendonButler\/ModestAPI\/blob\/master\/LICENSE.md"
+        },
+        "created": "Mar 28, 2016",
+        "updated": "Sept 15, 2016",
+        "download": "http:\/\/dl.sparkzz.net\/java\/modest\/modest.jar",
+        "downloads": 286,
+        "source": "https:\/\/github.com\/BrendonButler\/ModestAPI",
+        "api": true,
+        "dependency_info": "http:\/\/repo.sparkzz.net\/modest\/dependency-info.html"
+    },
+    "visionless": {
+        "human_name": "Visionless",
+        "type": "java",
+        "version": "0.1",
+        "description": "A RPG-esque game using my ModestAPI engine. My plan is to evolve this game to 2D, then 3D when and if I evolve ModestAPI to 2D and 3D. Visionless is mainly to be used to test features of ModestAPI as well as find bugs, and etc.",
+        "developers": [{
+            "name": "Brendon Butler",
+            "contribution": "Lead Developer",
+            "github": "BrendonButler"
+        }],
+        "license": {
+            "name": "MIT License",
+            "link": "https:\/\/github.com\/BrendonButler\/Visionless\/blob\/master\/LICENSE.md"
+        },
+        "created": "Mar 23, 2016",
+        "updated": "Oct 12, 2016",
+        "download": "http:\/\/dl.sparkzz.net\/java\/visionless\/visionless.jar",
+        "downloads": 263,
+        "source": "https:\/\/github.com\/BrendonButler\/Visionless"
+    }
+}

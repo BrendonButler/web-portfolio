@@ -68,3 +68,122 @@ header hr {
 /*
 * projects
 */
+section {
+  padding: 1.25em 15%;
+}
+
+section:nth-child(even) {
+    background: #F5F5F5;
+}
+
+section a {
+  color: #941A8E;
+  text-decoration: none;
+  transition: 200ms;
+}
+
+section a:hover {
+  color: #1BAFBF
+}
+
+.right {
+  margin-left: 5%;
+  width: calc(95% - 150px);
+  min-height: 150px;
+}
+
+.logo, .right, .right > * {
+  display: inline-block;
+  vertical-align: top;
+}
+
+.project-name {
+  margin-top: 0.25em;
+  min-width: 150px;
+}
+
+.data {
+  margin-top: 0.25em;
+  padding-top: 0.5em;
+  min-width: 150px;
+}
+
+.description {
+  margin: 0;
+  vertical-align: bottom;
+}
+
+.links, .extra {
+  margin: 1em 0 0 0;
+  padding: 0;
+  display: inline-block;
+}
+
+.links {
+  width: 150px;
+  text-align: center;
+}
+
+.links a {
+  padding: 0.25em 0.25em;
+  background: #8585850A;
+  border: solid #85858514 1px;
+  border-radius: 5px;
+  font-weight: 400;
+  color: #115F7E;
+  transition: color 0.2s, background-color 0.2s, border-color 0.2s;
+}
+
+.links a:hover {
+  background: #85858514;
+  color: #115F7E;
+}
+
+.data {
+  width: calc(95% - 300px);
+}
+
+.extra {
+  margin-left: 5%;
+  width: calc(95% - 150px);
+  vertical-align: top;
+}
+
+.data li, .links li, .extra li {
+  margin: 0.5em 0.25em;
+  display: inline;
+}
+
+.links li:first-of-type, .extra li:first-of-type {
+  margin-left: 0;
+}
+
+.links li:last-of-type {
+  margin-right: 0;
+}
+
+.data li {
+  margin: 0 2.5%;
+  list-style-type: none;
+}
+
+.extra li {
+  margin: 0.5em 2.5%;
+  list-style-type: none;
+}
+
+.download a::before {
+  content: "download";
+}
+
+.source a::before {
+  content: "source";
+}
+
+.created::before {
+  content: "Created: ";
+}
+
+.updated::before {
+  content: "Updated: ";
+}
