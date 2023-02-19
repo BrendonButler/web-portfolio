@@ -6,6 +6,7 @@ var main = document.querySelector('main');
 main.innerHTML = "";
 
 // create elements
+// MODEST
 var section = document.createElement("section");
 var img = document.createElement("img");
 var div = document.createElement("div");
@@ -29,6 +30,7 @@ var liUpdated = document.createElement("li");
 var liDevs = document.createElement("li");
 var liHelp = document.createElement("li");
 
+// VISIONLESS
 var sectionVis = document.createElement("section");
 var imgVis = document.createElement("img");
 var divVis = document.createElement("div");
