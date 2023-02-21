@@ -1,5 +1,5 @@
 /* fonts */
-/* @import url(https://fonts.googleapis.com/css?family=Ubuntu:400,700|Roboto:400,300); */
+@import url(https://fonts.googleapis.com/css?family=Ubuntu:400,700|Roboto:700,500,400,300);
 
 /*
 * general
@@ -110,4 +110,63 @@ section a {
 section a:hover {
     background: #85858514;
     color: #115F7E;
+}
+
+
+/*
+* portfolio
+*/
+
+dt {
+    padding: 1em;
+    padding-bottom: 0;
+    display: block;
+    font-family: 'Roboto', Roboto, monospace;
+}
+
+dt time {
+    padding-left: 20px;
+    text-align: right;
+    float: right;
+}
+
+dd {
+    margin: 0;
+    padding: 1em 2em;
+    clear: both;
+    font-family: 'Roboto', Roboto, monospace;
+    font-weight: 400;
+    font-size: 0.95em;
+    line-height: 1.25em;
+}
+
+.course-code {
+    font-weight: bold;
+}
+
+.course-title {
+    font-weight: 300;
+    font-style: italic;
+}
+
+.test-score {
+    font-weight: bold;
+}
+
+/* portfolio dt/dd elements */
+
+dt.CSCI, dt.CSCI + dd {
+    background-color: rgba(26, 161, 182, 0.1);
+}
+
+dt.CMIT, dt.CMIT + dd {
+    background-color: rgba(26, 161, 182, 0.1);
+}
+
+dt.MATH, dt.MATH + dd {
+    background-color: rgba(27, 145, 33, 0.1);
+}
+
+dt.POLS, dt.POLS + dd {
+    background-color: rgba(151, 26, 182, 0.1);
 }
