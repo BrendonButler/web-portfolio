@@ -1,0 +1,113 @@
+/* fonts */
+/* @import url(https://fonts.googleapis.com/css?family=Ubuntu:400,700|Roboto:400,300); */
+
+/*
+* general
+*/
+
+body {
+    margin: 0;
+    min-width: 400px;
+    background: #F0F0F0;
+    color: #282828;
+}
+
+
+/*
+* header
+*/
+
+header {
+    width: 80%;
+    padding: clamp(20px, 8vw, 40px) 10%;
+    background: #B4B4B4 linear-gradient(120deg, #1BAFBF, #941A8E);
+    color: #FFFFFF;
+}
+
+header #profile-image {
+    width: clamp(125px, 11vw, 200px);
+    height: clamp(125px, 11vw, 200px);
+    display: block;
+    margin: auto;
+    border: 3px solid #FFFFFF;
+    border-radius: 50%;
+    transition: all .5s;
+}
+
+header #profile-image:hover {
+    transform: scale(1.2) rotate(5deg);
+}
+
+header h1 {
+    font-family: 'Ubuntu', sans-serif;
+    font-size: clamp(25px, 2.5vw, 40px);
+    font-weight: bold;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+header p {
+    margin: 1em 0 0 0;
+    font-family: 'Roboto', sans-serif;
+    font-size: 0.9em;
+    text-align: center;
+    opacity: 0.8;
+}
+
+#tagline {
+    font-weight: lighter;
+}
+
+header hr {
+    width: clamp(200px, 18vw, 325px);
+    opacity: 0.8;
+}
+
+
+/*
+* content
+*/
+
+section:nth-child(even) {
+    background: #F5F5F5;
+}
+
+section {
+    padding: 20px 10%;
+    font-family: 'Roboto', sans-serif;
+    text-align: center;
+}
+
+section h2 {
+    margin-top: 0;
+}
+
+section ul {
+    margin: auto;
+    padding: 0;
+    list-style-type: none;
+    text-align: center;
+}
+
+section li {
+    display: inline-block;
+}
+
+section a {
+    margin: 8px 7px;
+    padding: 12px 14px;
+    display: block;
+    background: #8585850A;
+    border: solid #85858514 1px;
+    border-radius: 5px;
+    font-size: 0.95em;
+    font-weight: 400;
+    text-decoration: none;
+    color: #115F7E;
+    transition: color 0.2s, background-color 0.2s, border-color 0.2s;
+}
+
+section a:hover {
+    background: #85858514;
+    color: #115F7E;
+}
