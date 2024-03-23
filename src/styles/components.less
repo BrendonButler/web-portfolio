@@ -1,0 +1,115 @@
+@import 'themes/dark.css';
+@import 'themes/light.css';
+
+@primary-color: #1BAFBF;
+@secondary-color: #941A8E;
+@background-translucent: #8585850A;
+@border-translucent: #85858514;
+
+/* fonts */
+@import url(https://fonts.googleapis.com/css?family=Ubuntu:400,700|Roboto:400,300);
+
+/*
+ * general
+ */
+
+body {
+  font: 400 1em 'Roboto', sans-serif;
+  margin: 0;
+  min-width: 400px;
+  background: var(--background-color);
+  color: var(--text-color);
+  transition: background 0.5s ease-in-out, color 0.5s ease-in-out;
+}
+
+/*
+ * common components
+ */
+
+header {
+  width: 80vw;
+  padding: clamp(20px, 8vw, 40px) 10vw;
+  background: var(--background-color-accent) linear-gradient(var(--header-gradient-degrees), @primary-color, @secondary-color);
+  color: var(--text-color-header);
+  transition: background 0.5s ease-in-out, color 0.5s ease-in-out;
+
+  #profile-image {
+    width: clamp(125px, 11vw, 200px);
+    height: clamp(125px, 11vw, 200px);
+    display: block;
+    margin: auto;
+    border: 3px solid var(--text-color-header);
+    border-radius: 50%;
+    transition: transform 0.5s ease;
+
+    &:hover {
+      transform: scale(1.2) rotate(5deg);
+    }
+  }
+
+  h1 {
+    font: 700 clamp(25px, 2.5vw, 40px) 'Ubuntu', sans-serif;
+    text-align: center;
+    text-transform: uppercase;
+  }
+
+  hr {
+    width: clamp(200px, 18vw, 325px);
+    border: 1px solid var(--text-color-header);
+    opacity: 0.8;
+  }
+
+  #tagline {
+    display: block;
+    margin: 1em 0 0 0;
+    font: 300 0.9em 'Roboto', sans-serif;
+    color: var(--text-color-header-accent);
+    text-align: center;
+    opacity: 0.8;
+  }
+}
+
+nav {
+  margin: 1em 0;
+  padding: 0;
+
+  ul {
+    display: flex;
+    justify-content: center;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  li {
+    flex-direction: column;
+    margin: 0 1em;
+    font: 700 1.1em 'Ubuntu', sans-serif;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: color 0.5s ease-in-out;
+
+    &:hover {
+      color: var(--text-color-header-accent);
+    }
+
+    a {
+      color: var(--text-color-header);
+      text-decoration: none;
+    }
+  }
+}
+
+/*
+ * overlay components
+ */
+
+#themeToggle {
+  font-size: 0.75em;
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  z-index: 100;
+  cursor: pointer;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}

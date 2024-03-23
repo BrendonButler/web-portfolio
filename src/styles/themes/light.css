@@ -1,0 +1,10 @@
+:root[data-theme="light"] {
+    --background-color: #F0F0F0;
+    --background-color-alternate: #F5F5F5;
+    --background-color-accent: #B4B4B4;
+    --text-color: #282828;
+    --text-color-header: #FFFFFF;
+    --text-color-header-accent: #F0F0F0;
+    --link-color: #1BAFBF;
+    --header-gradient-degrees: 120deg;
+}

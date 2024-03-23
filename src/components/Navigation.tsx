@@ -1,6 +1,4 @@
-import { Fragment } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import portrait from '../assets/brendon-small.png';
 
 type LinkType = {
   path: string,
@@ -16,14 +14,19 @@ function Navigation() {
     { path: '/about', value: 'About me' }
   ];
 
-  return (
-      <Fragment>
-        <img id="profile-image" src={portrait} alt='Photo of Brendon Butler' />
-        <h1>Brendon Butler</h1>
-        <hr />
-        <p><span id="tagline">I'm a software developer who's working towards a better understanding of web and application development</span></p>
-      </Fragment>
-  );
+  return activePath !== '/' ? (
+      <nav>
+         <ul>{links.map((link: LinkType, index: number) => (
+             link.path !== activePath && (
+                 <li key={index}>
+                   <Link className='app-link' to={link.path}>
+                     {link.value}
+                   </Link>
+                 </li>
+             )
+         ))}</ul>
+      </nav>
+  ) : null;
 }
 
 export default Navigation;

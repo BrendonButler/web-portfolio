@@ -1,15 +1,22 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter as Router, Routes as Switch, Route } from 'react-router-dom';
-import './styles/normalize.css';
-import './styles/home.less';
+import 'normalize.css/normalize.css';
+import './styles/components.less';
 import { NotFound, ServerError } from './components/Errors';
 import Navigation from "./components/Navigation";
 import Home from "./pages/Home";
+import { ThemeProvider } from './contexts/ThemeProvider';
+import { ThemeToggleButton } from "./components/Overlay";
+import portrait from "./assets/brendon-small.png";
 
 const Header = function () {
   return (
       <header>
+        <img id="profile-image" src={portrait} alt='Brendon Butler' />
+        <h1>Brendon Butler</h1>
+        <hr />
+        <span id="tagline">I'm a software developer who's working towards a better understanding of web and application development</span>
         <Navigation />
       </header>
   );
@@ -31,14 +38,17 @@ const Content = function (props: { show: boolean }) {
 
 function App() {
   return (
-      <div className='app'>
-        <Header />
-        <Content show={true} />
-      </div>
+      <ThemeProvider>
+        <div className='app'>
+          <ThemeToggleButton />
+          <Header />
+          <Content show={true} />
+        </div>
+      </ThemeProvider>
   );
 }
 
-const root = ReactDOM.createRoot(
+const root: ReactDOM.Root = ReactDOM.createRoot(
     document.getElementById('root') as HTMLElement
 );
 root.render(

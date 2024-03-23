@@ -1,0 +1,10 @@
+:root[data-theme="dark"] {
+    --background-color: #808080;
+    --background-color-alternate: #7C7C7C;
+    --background-color-accent: #1A1A1A;
+    --text-color: #F0F0F0;
+    --text-color-header: #282828;
+    --text-color-header-accent: #131313;
+    --link-color: #115F7E;
+    --header-gradient-degrees: 300deg;
+}
