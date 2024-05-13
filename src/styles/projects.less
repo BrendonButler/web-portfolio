@@ -1,0 +1,112 @@
+#project-list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 15px;
+  margin: 20px 0;
+}
+
+.project-minimal {
+  display: flex;
+  width: 80vw;
+  padding: 10px;
+  border: 1px solid var(--border-color);
+  border-radius: 5px;
+  background-color: var(--background-color-lighter-alt);
+  box-shadow: 0 0 5px var(--drop-shadow);
+  cursor: pointer;
+  transition: background-color 0.5s ease-in-out, border 0.5s ease-in-out;
+
+  &:active {
+    background-color: var(--background-color);
+  }
+
+  img {
+    margin-right: 10px;
+    width: 100px;
+    height: 100px;
+    pointer-events: none;
+  }
+
+  .project-minimal-info {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+
+    h3, p {
+      margin: 0;
+    }
+
+    a {
+      color: var(--link-color);
+      text-decoration: none;
+    }
+  }
+}
+
+#project {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  width: 90vw;
+  margin: 20px auto;
+  border: 1px solid var(--border-color);
+  border-radius: 5px;
+  background-color: var(--background-color-lighter);
+  box-shadow: 0 0 5px var(--drop-shadow);
+  transition: background-color 0.5s ease-in-out, border 0.5s ease-in-out;
+
+  button {
+    background-color: var(--background-color-lighter-alt);
+    color: var(--button-text-color);
+    border: none;
+    border-right: 1px solid var(--border-color);
+    border-radius: 5px;
+    padding: 5px 10px;
+    cursor: pointer;
+    transition: background-color 0.5s ease-in-out, border 0.5s ease-in-out;
+  }
+
+  button:active {
+    background-color: var(--background-color);
+  }
+
+  #project-panel {
+    padding: 10px;
+    width: 70%;
+
+    h2 {
+      margin: 0;
+    }
+
+    p {
+      margin: 10px 0;
+    }
+  }
+
+  #project-aside {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    gap: 20px;
+    width: 30%;
+    padding: 10px;
+    word-wrap: break-word;
+    background-color: var(--background-color-lighter-alt);
+    border-left: 1px solid var(--border-color);
+    border-radius: 5px;
+    transition: background-color 0.5s ease-in-out, border 0.5s ease-in-out;
+
+    img {
+      align-self: center;
+      max-width: 150px;
+      pointer-events: none;
+    }
+
+    a {
+      color: var(--link-color);
+      text-decoration: none;
+    }
+  }
+}

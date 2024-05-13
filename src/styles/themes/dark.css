@@ -1,10 +1,15 @@
 :root[data-theme="dark"] {
     --background-color: #808080;
-    --background-color-alternate: #7C7C7C;
+    --background-color-lighter: #A0A0A0;
+    --background-color-lighter-alt: #C0C0C0;
+    --background-color-darker: #606060;
+    --background-color-darker-alt: #404040;
     --background-color-accent: #1A1A1A;
-    --text-color: #F0F0F0;
+    --border-color: #333333;
+    --drop-shadow: rgba(0, 0, 0, 0.2);
+    --text-color: #030303;
     --text-color-header: #282828;
     --text-color-header-accent: #131313;
-    --link-color: #115F7E;
+    --link-color: #0d5e69;
     --header-gradient-degrees: 300deg;
 }
