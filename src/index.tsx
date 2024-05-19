@@ -19,10 +19,12 @@ const Header = function () {
   return (
       <header className={!isHomePage ? 'inline' : ''}>
         <img id="profile-image" src={portrait} alt='Brendon Butler' />
-        <h1>Brendon Butler</h1>
-        <hr />
-        <span id="tagline">I'm a software developer who's working towards a better understanding of web and application development</span>
-        <Navigation />
+        <div id={"header-right-content"}>
+          <h1>Brendon Butler</h1>
+          <hr />
+          <span id="tagline">I'm a software developer who's working towards a better understanding of web and application development</span>
+          <Navigation />
+        </div>
       </header>
   );
 }

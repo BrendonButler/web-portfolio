@@ -12,6 +12,10 @@
 /*
  * general
  */
+// add box-sizing fix:
+*, *:before, *:after {
+  box-sizing: border-box;
+}
 
 #error-page {
   padding: 5vh 15vw;
@@ -44,22 +48,37 @@ body {
   display: none !important;
 }
 
+a {
+    color: var(--link-color);
+    text-decoration: none;
+    transition: color 0.5s ease-in-out;
+}
+
 /*
  * common components
  */
 
 header {
-  width: 80vw;
+  display: flex;
+  flex-direction: column;
+  width: 100vw;
   padding: clamp(20px, 8vw, 40px) 10vw;
   background: var(--background-color-accent) linear-gradient(var(--header-gradient-degrees), @primary-color, @secondary-color);
   color: var(--text-color-header);
   transition: background 0.5s ease-in-out, color 0.5s ease-in-out;
   box-shadow: 0 0 5px var(--drop-shadow);
 
+  #header-right-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex-grow: 1;
+  }
+
   #profile-image {
     width: clamp(100px, 11vw, 200px);
     height: clamp(100px, 11vw, 200px);
-    display: block;
     margin: auto;
     border: 3px solid var(--text-color-header);
     border-radius: 50%;
@@ -77,15 +96,11 @@ header {
   }
 
   hr {
-    width: clamp(200px, 18vw, 325px);
-    border: 1px solid var(--text-color-header);
-    opacity: 0.8;
-    transition: border 0.5s ease;
+    display: none;
   }
 
   #tagline {
     display: block;
-    margin: 1em 0 0 0;
     font: 300 0.9em 'Roboto', sans-serif;
     color: var(--text-color-header-accent);
     text-align: center;
@@ -95,11 +110,12 @@ header {
 }
 
 header.inline {
-  display: inline-block;
+  flex-direction: row;
+  padding: 20px 10vw 80px 10vw;
 
   #profile-image {
     float: left;
-    margin: 0 1em 0 0;
+    margin: auto 10px;
     position: relative;
     top: 50%;
   }
