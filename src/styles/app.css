@@ -1,0 +1,96 @@
+/* fonts */
+@import url(https://fonts.googleapis.com/css?family=Ubuntu:400,700|Roboto:400,300|Press+Start+2P:400);
+
+/* themes */
+@import 'themes/dark.css';
+@import 'themes/light.css';
+
+/* global variables */
+:root {
+    --error-color: #f00;
+    --disabled-color: rgba(255,255,255,.3);
+    --disabled-background-color: rgba(255,255,255,.1);
+    --border-color: rgba(0, 0, 0, 0.42);
+
+    --primary-color: #1BAFBF;
+    --secondary-color: #941A8E;
+}
+
+/* global styles */
+html {
+    min-width: 800px;
+}
+
+/* global classes */
+.hidden {
+    display: none;
+}
+
+/* box-sizing fix */
+*, *:before, *:after {
+    box-sizing: border-box;
+}
+
+/*
+ * https://adrianroselli.com/2024/03/the-ultimate-ideal-bestest-base-font-size-that-everyone-is-keeping-a-secret-especially-chet.html
+ * https://adrianroselli.com/2019/09/under-engineered-text-boxen.html
+ */
+select, textarea, input, button {
+    font: inherit;
+}
+
+textarea, input {
+    font: inherit;
+    letter-spacing: inherit;
+    word-spacing: inherit;
+}
+
+textarea:focus,
+input:not([type="checkbox"]):not([type="file"]):not([type="image"]):not([type="radio"]):not([type="range"]):focus {
+    outline: 0.15em solid var(--focus-color);
+    box-shadow: 0 0 0.2em var(--focus-color);
+}
+
+textarea:disabled,
+input:not([type="checkbox"]):not([type="file"]):not([type="image"]):not([type="radio"]):not([type="range"]):disabled {
+    border-color: var(--disabled-color);
+    color: var(--disabled-color);
+    background-color: var(--disabled-background-color);
+}
+
+textarea[readonly],
+input:not([type="checkbox"]):not([type="file"]):not([type="image"]):not([type="radio"]):not([type="range"])[readonly] {
+    border-color: var(--border-color);
+    border-left: none;
+    border-top: none;
+    border-right: none;
+}
+
+textarea[required],
+input:not([type="checkbox"]):not([type="file"]):not([type="image"]):not([type="radio"]):not([type="range"])[required] {
+    border-left-width: 0.3em;
+}
+
+textarea[aria-invalid="true"], textarea[aria-invalid="spelling"], textarea[aria-invalid="grammar"],
+input:not([type="checkbox"]):not([type="file"]):not([type="image"]):not([type="radio"]):not([type="range"])[aria-invalid] {
+    background: linear-gradient(135deg, var(--error-color) 0, var(--error-color) .4em, var(--error-gradient-accent) .4em);
+}
+
+*[dir="rtl"] textarea[aria-invalid="true"],
+*[dir="rtl"] textarea[aria-invalid="spelling"],
+*[dir="rtl"] textarea[aria-invalid="grammar"],
+*[dir="rtl"] input:not([type="checkbox"]):not([type="file"]):not([type="image"]):not([type="radio"]):not([type="range"])[aria-invalid] {
+    background: linear-gradient(225deg, var(--error-color) 0, var(--error-color) .4em, var(--error-gradient-accent) .4em);
+}
+
+*[dir="rtl"] textarea[required],
+*[dir="rtl"] input:not([type="checkbox"]):not([type="file"]):not([type="image"]):not([type="radio"]):not([type="range"])[required] {
+    border-left-width: 0.1em;
+    border-right-width: 0.3em;
+}
+
+@media print {
+    html {
+        font-size: 8pt;
+    }
+}

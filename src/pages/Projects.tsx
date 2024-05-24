@@ -34,7 +34,7 @@ function Projects() {
       url: 'https://hangar.papermc.io/chalk/Shops',
       downloads: 100,
       links: [
-        {id: 'latest-download', url: 'https://www.spigotmc.org/resources/shops', text: 'Latest (Spigot)', version: '1.0.0'},
+        {id: 'latest-download', url: 'https://www.curseforge.com/minecraft/bukkit-plugins/command-shops', text: 'Latest (Spigot)', version: '1.0.0'},
       ]
     },
     {

@@ -1,21 +1,6 @@
-@import 'themes/dark.css';
-@import 'themes/light.css';
-
-@primary-color: #1BAFBF;
-@secondary-color: #941A8E;
-@background-translucent: #8585850A;
-@border-translucent: #85858514;
-
-/* fonts */
-@import url(https://fonts.googleapis.com/css?family=Ubuntu:400,700|Roboto:400,300|Press+Start+2P:400);
-
 /*
  * general
  */
-// add box-sizing fix:
-*, *:before, *:after {
-  box-sizing: border-box;
-}
 
 #error-page {
   padding: 5vh 15vw;
@@ -44,14 +29,14 @@ body {
   transition: background 0.5s ease-in-out, color 0.5s ease-in-out;
 }
 
-.hidden {
-  display: none !important;
+#app-content-pane {
+  border-top: var(--border-color) 1px solid;
 }
 
 a {
-    color: var(--link-color);
-    text-decoration: none;
-    transition: color 0.5s ease-in-out;
+  color: var(--link-color);
+  text-decoration: none;
+  transition: color 0.5s ease-in-out;
 }
 
 /*
@@ -61,37 +46,34 @@ a {
 header {
   display: flex;
   flex-direction: column;
-  width: 100vw;
-  padding: clamp(20px, 8vw, 40px) 10vw;
-  background: var(--background-color-accent) linear-gradient(var(--header-gradient-degrees), @primary-color, @secondary-color);
+  align-items: center;
+  padding: 4vh 10vw;
+  background: var(--background-color-accent) linear-gradient(var(--header-gradient-degrees), var(--primary-color), var(--secondary-color));
   color: var(--text-color-header);
   transition: background 0.5s ease-in-out, color 0.5s ease-in-out;
-  box-shadow: 0 0 5px var(--drop-shadow);
+  box-shadow: inset 0 0 5px var(--drop-shadow);
 
   #header-right-content {
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
-    flex-grow: 1;
   }
 
   #profile-image {
     width: clamp(100px, 11vw, 200px);
-    height: clamp(100px, 11vw, 200px);
-    margin: auto;
     border: 3px solid var(--text-color-header);
     border-radius: 50%;
-    transition: transform 0.5s ease, border 0.5s ease;
+    transition: transform 0.5s ease, border 0.5s ease, box-shadow 0.5s ease;
 
     &:hover {
       transform: scale(1.2) rotate(5deg);
+      border: 2px solid var(--link-color-hover);
+      box-shadow: 5px 5px 5px var(--drop-shadow);
     }
   }
 
   h1 {
     font: 700 clamp(25px, 2.5vw, 40px) 'Ubuntu', sans-serif;
-    text-align: center;
     text-transform: uppercase;
   }
 
@@ -100,43 +82,33 @@ header {
   }
 
   #tagline {
-    display: block;
     font: 300 0.9em 'Roboto', sans-serif;
-    color: var(--text-color-header-accent);
     text-align: center;
     opacity: 0.8;
-    transition: color 0.5s ease;
   }
 }
 
 header.inline {
   flex-direction: row;
-  padding: 20px 10vw 80px 10vw;
+  padding: 20px clamp(80px, 10vw, 160px) 80px clamp(80px, 10vw, 160px);
+
+  #header-right-content {
+    flex-grow: 1;
+  }
 
   #profile-image {
-    float: left;
-    margin: auto 10px;
-    position: relative;
-    top: 50%;
+    margin: unset;
+    width: clamp(100px, 11vw, 200px);
   }
 
   h1 {
-    margin-top: clamp(0em, 1vw, 1em);
-    width: 70%;
-    display: inline-block;
-    float: right;
+    margin-top: unset;
   }
 
   hr {
+    margin: unset;
     display: block;
-    width: 70%;
-    float: right;
-  }
-
-  nav {
-    display: block;
-    float: right;
-    width: 70%;
+    width: 80%;
   }
 
   #tagline {
@@ -146,32 +118,32 @@ header.inline {
 
 nav {
   margin: 1em 0;
-  padding: 0;
 
   ul {
     display: flex;
-    justify-content: center;
     list-style: none;
     margin: 0;
     padding: 0;
   }
 
   li {
-    flex-direction: column;
     margin: 0 1em;
     font: 700 1.1em 'Ubuntu', sans-serif;
     text-align: center;
-    text-transform: uppercase;
-    cursor: pointer;
+    text-transform: lowercase;
 
     a {
       color: var(--text-color-header);
-      text-decoration: none;
-      transition: color 0.5s ease-in-out;
+      transition: color 0.5s ease-in-out, text-shadow 0.5s ease-in-out;
     }
 
     a:hover {
-      color: var(--text-color-header-accent);
+      color: var(--link-color-hover);
+      text-shadow: 5px 5px 5px var(--drop-shadow);
+    }
+
+    a:active {
+      color: var(--link-color);
     }
   }
 }

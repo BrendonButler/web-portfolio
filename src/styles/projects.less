@@ -1,22 +1,10 @@
-#project-list {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 15px;
-  position: relative;
-  top: -8vh;
-  width: 90vw;
-  margin: 20px auto;
-}
-
 #feature-project {
   width: inherit;
 }
 
 .project-minimal {
   display: flex;
-  width: 80vw;
+  width: clamp(600px, 75vw, 1300px);
   padding: 10px;
   border: 1px solid var(--border-color);
   border-radius: 5px;
@@ -52,21 +40,22 @@
   }
 }
 
-#project {
+#project, #project-list {
   display: flex;
   flex-direction: column;
+  align-items: center;
   gap: 20px;
   position: relative;
-  top: -8vh;
-  width: 90vw;
+  top: -60px;
+  width: clamp(720px, 90vw, 1440px);
   margin: 20px auto;
   transition: background-color 0.5s ease-in-out, border 0.5s ease-in-out;
+}
 
+#project {
   button {
     background-color: var(--background-color-lighter-alt);
     color: var(--button-text-color);
-    border: none;
-    border: 1px solid var(--border-color);
     border-radius: 5px;
     box-shadow: 0 0 5px var(--drop-shadow);
     padding: 5px 10px;
@@ -79,6 +68,7 @@
   }
 
   #project-panel {
+    width: 100%;
     display: flex;
     flex-direction: row;
     gap: 20px;
@@ -87,8 +77,8 @@
 
 #header-card {
   display: flex;
-  align-items: center;
   gap: 10px;
+  width: 100%;
   padding: 10px;
   background-color: var(--background-color-lighter-alt);
   border: 1px solid var(--border-color);
@@ -101,17 +91,18 @@
     pointer-events: none;
   }
 
-  .project-card-title {
-    vertical-align: top;
-  }
-
   .project-card-info {
     flex-grow: 1;
+
+    p {
+      margin: 0;
+    }
   }
 
   .project-card-links {
     display: flex;
     flex-direction: column;
+    justify-content: center;
     gap: 5px;
 
     #latest-download {
@@ -221,7 +212,7 @@
 }
 
 .side-card {
-  width: 25vw;
+  width: clamp(250px, 25vw, 400px);
   padding: 10px;
   background-color: var(--background-color-lighter-alt);
   border: 1px solid var(--border-color);

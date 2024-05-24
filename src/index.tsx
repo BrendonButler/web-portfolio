@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter as Router, Routes as Switch, Route, useLocation } from 'react-router-dom';
 import 'normalize.css/normalize.css';
+import './styles/app.css';
 import './styles/components.less';
 import { NotFound, ServerError } from './components/Errors';
 import Navigation from "./components/Navigation";
@@ -31,7 +32,7 @@ const Header = function () {
 
 const Content = function () {
   return (
-      <main className='app-content-pane'>
+      <main id='app-content-pane'>
         <Switch>
           {/* Page routes */}
           <Route index path='/' element={<Home />} />

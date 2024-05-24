@@ -13,4 +13,6 @@
     --link-color: #189ba9;
     --link-color-hover: #1aa7b7;
     --header-gradient-degrees: 300deg;
+    --focus-color: #00ffff;
+    --error-gradient-accent: black;
 }
