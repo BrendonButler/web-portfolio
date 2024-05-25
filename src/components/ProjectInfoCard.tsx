@@ -1,6 +1,8 @@
-import {PropsWithChildren, ReactElement, ReactNode} from "react";
+import {PropsWithChildren, ReactElement, ReactNode, useEffect, useState} from "react";
 import {JSX} from "react/jsx-runtime";
+import ReactMarkdown from 'react-markdown';
 import {Project, Link} from "../pages/Projects";
+import rehypeRaw from "rehype-raw";
 
 interface Image {
   source: string;
@@ -12,6 +14,7 @@ interface CardProps {
   id?: string;
   title?: string;
   readme?: string;
+  readmeLink?: string;
   shortDescription?: string;
   image?: Image;
   links?: Link[];
@@ -64,11 +67,21 @@ export function HeaderCard({cardProps, selectProject}: {
 }
 
 export function MainCard(cardProps?: PropsWithChildren<CardProps>) {
+  const [readme, setReadme] = useState(cardProps?.readme || '');
+
+  useEffect(() => {
+    if (cardProps && cardProps?.readmeLink) {
+      fetch(cardProps.readmeLink)
+          .then((response) => response.text())
+          .then((text) => setReadme(text));
+    }
+  }, [cardProps, cardProps?.readmeLink]);
+
   return (
       (cardProps !== undefined) &&
       <section className="project-card" id="main-card">
-        {cardProps.readme && <article>{cardProps.readme}</article>}
-        {cardProps.children && cardProps.children}
+        {readme && <article><ReactMarkdown rehypePlugins={[rehypeRaw]}>{readme}</ReactMarkdown></article>}
+        {cardProps.children && <article>{cardProps.children}</article>}
       </section>
   ) as ReactElement | null;
 }

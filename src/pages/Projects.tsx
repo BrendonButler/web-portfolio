@@ -5,13 +5,18 @@ import {PreviewCard, HeaderCard, MainCard, SideCard} from "../components/Project
 
 export interface Project {
   projectSlug: string;
+  type: string;
   logo: string;
   title: string;
-  // support Markdown for READMEs
-  readme: string;
+  readme?: string;
+  readmeLink?: string;
   shortDescription: string;
   url: string;
   downloads: number;
+  license?: Link;
+  developmentStarted?: Date;
+  publishedOn?: Date;
+  lastUpdated?: Date;
   links?: Link[];
 }
 
@@ -27,18 +32,24 @@ function Projects() {
   const projects: Project[] = useMemo<Project[]>(() => ([
     {
       projectSlug: 'shops-spigot-plugin',
+      type: 'software',
       logo: 'https://hangarcdn.papermc.io/avatars/project/1237.webp?v=1',
       title: 'Shops (Spigot/Paper)',
-      readme: 'Shops is a simple, lightweight, and easy-to-use shop plugin for Spigot and Paper servers.',
+      readmeLink: 'https://raw.githubusercontent.com/BrendonButler/Shops/develop/README.md',
       shortDescription: 'This is a description of project 1.',
       url: 'https://hangar.papermc.io/chalk/Shops',
       downloads: 100,
       links: [
         {id: 'latest-download', url: 'https://www.curseforge.com/minecraft/bukkit-plugins/command-shops', text: 'Latest (Spigot)', version: '1.0.0'},
-      ]
+        {id: 'curseforge', url: 'https://www.curseforge.com/minecraft/bukkit-plugins/command-shops', text: 'CurseForge (Spigot)', version: '1.0.0'},
+        {id: 'hangar', url: 'https://hangar.papermc.io/chalk/Shops', text: 'Hangar (PaperMC)', version: '1.0.0'},
+        {id: 'github', url: 'https://www.github.com/BrendonButler/Shops', text: 'GitHub'}
+      ],
+      license: {id: 'license', url: 'https://github.com/BrendonButler/Shops/blob/develop/LICENSE', text: 'GNU GPLv2'}
     },
     {
       projectSlug: 'project-2',
+      type: 'website',
       logo: 'https://www.example.com/project2.png',
       title: 'Project 2',
       readme: 'This is a description of project 2.',
@@ -48,6 +59,7 @@ function Projects() {
     },
     {
       projectSlug: 'project-3',
+      type: 'video',
       logo: 'https://www.example.com/project3.png',
       title: 'Project 3',
       readme: 'This is a description of project 3.',
@@ -98,7 +110,8 @@ function Projects() {
           <MainCard
               id = {selectedProject.projectSlug}
               title = {selectedProject.title}
-              readme = {selectedProject.readme}
+              readme = {selectedProject?.readme}
+              readmeLink = {selectedProject?.readmeLink}
               shortDescription = {selectedProject.shortDescription}
               image = {{source: selectedProject.logo, alt: selectedProject.title, title: selectedProject.title}}
               links = {selectedProject.links}
@@ -108,24 +121,27 @@ function Projects() {
             <SideCard title={"Project Info"}>
               <table>
                 <tbody>
-                <tr>
+                {selectedProject.downloads && <tr>
                   <td><strong>Downloads</strong></td>
                   <td>{selectedProject.downloads}</td>
-                </tr>
-                <tr>
-                  <td><strong>Links</strong></td>
-                  <td>
-                    {selectedProject.links && selectedProject.links.map((link: Link, index: number) => (
-                        <a key={index} id={link.id} href={link.url} target="_blank" rel="noopener noreferrer">
-                          {link.text || link.url}
-                          {link.version && <span> {link.version}</span>}
-                        </a>
-                    ))}
-                  </td>
-                </tr>
+                </tr>}
+                {selectedProject.license && <tr>
+                  <td><strong>License</strong></td>
+                  <td><a href={selectedProject.license.url} title={selectedProject.license.id} target='_blank' rel='noopener noreferrer'>{selectedProject.license.text}</a></td>
+                </tr>}
                 </tbody>
               </table>
             </SideCard>
+
+            {selectedProject.links && <SideCard title={"Additional Links"}>
+              <ul>
+                {selectedProject.links
+                    ?.filter((link: Link) => link.id !== 'latest-download')
+                    .map((link: Link, index: number) => (
+                        <li key={index}><a href={link.url} target='_blank' rel='noopener noreferrer'>{link.text || link.id}</a></li>
+                    ))}
+              </ul>
+            </SideCard>}
           </aside>
         </div>
       </div>
