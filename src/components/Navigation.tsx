@@ -1,9 +1,9 @@
 import { Link } from 'react-router-dom';
 
 type LinkType = {
-  path: string,
-  value: string
-}
+  path: string;
+  value: string;
+};
 
 function Navigation() {
   const links: LinkType[] = [
@@ -13,15 +13,17 @@ function Navigation() {
   ];
 
   return (
-      <nav>
-         <ul>{links.map((link: LinkType, index: number) => (
-             <li key={index}>
-               <Link className='app-link' to={link.path}>
-                 {link.value}
-               </Link>
-             </li>
-         ))}</ul>
-      </nav>
+    <nav>
+      <ul>
+        {links.map((link: LinkType, index: number) => (
+          <li key={index}>
+            <Link className='app-link' to={link.path}>
+              {link.value}
+            </Link>
+          </li>
+        ))}
+      </ul>
+    </nav>
   );
 }
 

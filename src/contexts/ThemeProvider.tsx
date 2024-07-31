@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, { useEffect } from 'react';
 
 export enum Theme {
   Light = 'light',
@@ -11,7 +11,8 @@ interface ThemeContextType {
 }
 
 const defaultTheme: ThemeContextType = {
-  theme: Theme.Light, toggleTheme: (): void => {}
+  theme: Theme.Light,
+  toggleTheme: (): void => {}
 };
 
 export const ThemeContext = React.createContext<ThemeContextType>(defaultTheme);
@@ -20,16 +21,12 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
   const [theme, setTheme] = React.useState<Theme>(defaultTheme.theme);
 
   const toggleTheme = (): void => {
-    setTheme(prevTheme => (prevTheme === Theme.Light ? Theme.Dark : Theme.Light));
+    setTheme((prevTheme) => (prevTheme === Theme.Light ? Theme.Dark : Theme.Light));
   };
 
   useEffect((): void => {
     document.documentElement.dataset.theme = `${theme}`;
   }, [theme]);
 
-  return (
-      <ThemeContext.Provider value={{ theme, toggleTheme }}>
-        {children}
-      </ThemeContext.Provider>
-  );
+  return <ThemeContext.Provider value={{ theme, toggleTheme }}>{children}</ThemeContext.Provider>;
 };

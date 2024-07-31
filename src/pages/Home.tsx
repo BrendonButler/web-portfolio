@@ -2,11 +2,9 @@ import { Fragment } from 'react';
 
 function Home() {
   return (
-      <Fragment>
-        <p>
-          Welcome home :)
-        </p>
-      </Fragment>
+    <Fragment>
+      <p>Welcome home :)</p>
+    </Fragment>
   );
 }
 

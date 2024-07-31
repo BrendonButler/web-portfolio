@@ -11,22 +11,30 @@
   text-align: center;
 
   h1 {
-    font: 700 3em 'Ubuntu', sans-serif;
+    font:
+      700 3em 'Ubuntu',
+      sans-serif;
   }
 
   p {
-    font: 400 1em 'Press Start 2P', sans-serif;
+    font:
+      400 1em 'Press Start 2P',
+      sans-serif;
     line-height: 2em;
   }
 }
 
 body {
-  font: 400 1em 'Roboto', sans-serif;
+  font:
+    400 1em 'Roboto',
+    sans-serif;
   margin: 0;
   min-width: 400px;
   background: var(--background-color);
   color: var(--text-color);
-  transition: background 0.5s ease-in-out, color 0.5s ease-in-out;
+  transition:
+    background 0.5s ease-in-out,
+    color 0.5s ease-in-out;
 }
 
 #app-content-pane {
@@ -48,9 +56,12 @@ header {
   flex-direction: column;
   align-items: center;
   padding: 4vh 10vw;
-  background: var(--background-color-accent) linear-gradient(var(--header-gradient-degrees), var(--primary-color), var(--secondary-color));
+  background: var(--background-color-accent)
+    linear-gradient(var(--header-gradient-degrees), var(--primary-color), var(--secondary-color));
   color: var(--text-color-header);
-  transition: background 0.5s ease-in-out, color 0.5s ease-in-out;
+  transition:
+    background 0.5s ease-in-out,
+    color 0.5s ease-in-out;
   box-shadow: inset 0 0 5px var(--drop-shadow);
 
   #header-right-content {
@@ -63,7 +74,10 @@ header {
     width: clamp(100px, 11vw, 200px);
     border: 3px solid var(--text-color-header);
     border-radius: 50%;
-    transition: transform 0.5s ease, border 0.5s ease, box-shadow 0.5s ease;
+    transition:
+      transform 0.5s ease,
+      border 0.5s ease,
+      box-shadow 0.5s ease;
 
     &:hover {
       transform: scale(1.2) rotate(5deg);
@@ -73,7 +87,9 @@ header {
   }
 
   h1 {
-    font: 700 clamp(25px, 2.5vw, 40px) 'Ubuntu', sans-serif;
+    font:
+      700 clamp(25px, 2.5vw, 40px) 'Ubuntu',
+      sans-serif;
     text-transform: uppercase;
   }
 
@@ -82,7 +98,9 @@ header {
   }
 
   #tagline {
-    font: 300 0.9em 'Roboto', sans-serif;
+    font:
+      300 0.9em 'Roboto',
+      sans-serif;
     text-align: center;
     opacity: 0.8;
   }
@@ -128,13 +146,17 @@ nav {
 
   li {
     margin: 0 1em;
-    font: 700 1.1em 'Ubuntu', sans-serif;
+    font:
+      700 1.1em 'Ubuntu',
+      sans-serif;
     text-align: center;
     text-transform: lowercase;
 
     a {
       color: var(--text-color-header);
-      transition: color 0.5s ease-in-out, text-shadow 0.5s ease-in-out;
+      transition:
+        color 0.5s ease-in-out,
+        text-shadow 0.5s ease-in-out;
     }
 
     a:hover {
