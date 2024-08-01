@@ -1,6 +1,7 @@
 {
   "short_name": "Brendon Butler's Portfolio",
-  "name": "Brendon Butler's Software Development Portfolio",
+  "name": "Brendon Butler's software development portfolio",
+    "description": "A software developer with a focus on full-stack web development and Minecraft plugin creation",
   "icons": [
     {
       "src": "favicon.ico",
@@ -8,18 +9,24 @@
       "type": "image/x-icon"
     },
     {
-      "src": "logo192.png",
-      "type": "image/png",
-      "sizes": "192x192"
-    },
-    {
-      "src": "logo512.png",
+      "src": "../src/assets/brendon.png",
       "type": "image/png",
       "sizes": "512x512"
     }
   ],
   "start_url": ".",
   "display": "standalone",
-  "theme_color": "#727E8D",
-  "background_color": "#727E8D"
+  "theme_color": "#1bafbf",
+  "background_color": "#1bafbf",
+  "orientation": "portrait-primary",
+  "scope": "/",
+  "categories": [
+    "portfolio",
+    "programming",
+    "software development",
+    "web development",
+    "Minecraft",
+    "plugin development"
+  ],
+  "related_applications": []
 }
