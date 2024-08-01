@@ -1,7 +1,7 @@
 {
   "short_name": "Brendon Butler's Portfolio",
   "name": "Brendon Butler's software development portfolio",
-    "description": "A software developer with a focus on full-stack web development and Minecraft plugin creation",
+  "description": "A software developer with a focus on full-stack web development and Minecraft plugin creation",
   "icons": [
     {
       "src": "favicon.ico",

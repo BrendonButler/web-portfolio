@@ -1,24 +1,10 @@
 import { PropsWithChildren, ReactElement, ReactNode, useEffect, useState } from 'react';
 import { JSX } from 'react/jsx-runtime';
 import ReactMarkdown from 'react-markdown';
-import { Project, Link } from '../pages/Projects';
 import rehypeRaw from 'rehype-raw';
-
-interface Image {
-  source: string;
-  alt: string;
-  title: string;
-}
-
-interface CardProps {
-  id?: string;
-  title?: string;
-  readme?: string;
-  readmeLink?: string;
-  shortDescription?: string;
-  image?: Image;
-  links?: Link[];
-}
+import ProjectLink from '../types/ProjectLink';
+import Project from '../types/Project';
+import CardProps from '../types/CardProps';
 
 export function PreviewCard(cardProps: CardProps, children?: ReactNode) {
   return ((cardProps !== undefined || children) && (
@@ -30,7 +16,7 @@ export function PreviewCard(cardProps: CardProps, children?: ReactNode) {
         {cardProps.title && <h3>{cardProps.title}</h3>}
         {cardProps.shortDescription && <p>{cardProps.shortDescription}</p>}
         {cardProps.links &&
-          cardProps.links.map((link: Link, index: number) => (
+          cardProps.links.map((link: ProjectLink, index: number) => (
             <a key={index} id={link.id} href={link.url} target='_blank' rel='noopener noreferrer'>
               {link.text || link.url}
               {link.version && <span>{link.version}</span>}
@@ -65,7 +51,7 @@ export function HeaderCard({
       <div className={'project-card-links'}>
         {cardProps.links &&
           cardProps.links.map(
-            (link: Link, index: number) =>
+            (link: ProjectLink, index: number) =>
               link.id === 'latest-download' && (
                 <a
                   key={index}
