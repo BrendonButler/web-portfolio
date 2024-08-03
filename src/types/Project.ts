@@ -1,12 +1,19 @@
-import ProjectLink from './ProjectLink';
+export enum ProjectType {
+  GITHUB = "GITHUB",
+  PHOTO = "PHOTO",
+  VIDEO = "VIDEO",
+  WEBSITE = "WEBSITE",
+  OTHER = "OTHER"
+}
 
 export default interface Project {
   projectSlug: string;
-  type: string;
+  type: ProjectType;
   logo: string;
   title: string;
+  owner: string;
+  branch?: string;
   readme?: string;
-  readmeLink?: string;
   shortDescription: string;
   url: string;
   downloads: number;
@@ -16,3 +23,17 @@ export default interface Project {
   lastUpdated?: Date;
   links?: ProjectLink[];
 }
+
+export interface ProjectImage {
+  source: string;
+  alt: string;
+  title: string;
+}
+
+export interface ProjectLink {
+  id: string;
+  url: string;
+  text?: string;
+  version?: string;
+}
+

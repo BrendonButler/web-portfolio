@@ -7,10 +7,10 @@ import './styles/components.less';
 import { NotFound, ServerError } from './components/Errors';
 import Navigation from './components/Navigation';
 import Home from './pages/Home';
-import Projects from './pages/Projects';
 import { ThemeProvider } from './contexts/ThemeProvider';
 import { ThemeToggleButton } from './components/Overlay';
 import portrait from './assets/brendon-small.png';
+import Projects from './pages/projects/Projects';
 
 const Header = function () {
   const { pathname } = useLocation();

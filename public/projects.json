@@ -1,18 +1,18 @@
 [
   {
-    "projectSlug": "shops-spigot-plugin",
-    "type": "software",
+    "projectSlug": "shops",
+    "type": "GITHUB",
     "logo": "https://hangarcdn.papermc.io/avatars/project/1237.webp?v=1",
     "title": "Shops (Spigot/Paper)",
-    "readmeLink": "https://raw.githubusercontent.com/BrendonButler/Shops/develop/README.md",
+    "owner": "BrendonButler",
+    "branch": "develop",
     "shortDescription": "Shops is a vanilla-style, command-driven shopping plugin for Spigot Servers.",
     "url": "https://github.com/BrendonButler/Shops",
-    "downloads": 117,
     "links": [
       {
         "id": "latest-download",
         "url": "https://github.com/BrendonButler/Shops/releases/latest",
-        "text": "Latest (GitHub)",
+        "text": "Latest Download (GitHub)",
         "version": "0.2-BETA"
       },
       {
@@ -43,7 +43,7 @@
   },
   {
     "projectSlug": "project-2",
-    "type": "website",
+    "type": "WEBSITE",
     "logo": "https://www.example.com/project2.png",
     "title": "Project 2",
     "readme": "This is a description of project 2.",
@@ -53,7 +53,7 @@
   },
   {
     "projectSlug": "project-3",
-    "type": "video",
+    "type": "VIDEO",
     "logo": "https://www.example.com/project3.png",
     "title": "Project 3",
     "readme": "This is a description of project 3.",
