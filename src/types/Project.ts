@@ -1,9 +1,11 @@
+import { GitHubRepository } from './GitHubProjects';
+
 export enum ProjectType {
-  GITHUB = "GITHUB",
-  PHOTO = "PHOTO",
-  VIDEO = "VIDEO",
-  WEBSITE = "WEBSITE",
-  OTHER = "OTHER"
+  GITHUB = 'GITHUB',
+  PHOTO = 'PHOTO',
+  VIDEO = 'VIDEO',
+  WEBSITE = 'WEBSITE',
+  OTHER = 'OTHER'
 }
 
 export default interface Project {
@@ -22,6 +24,7 @@ export default interface Project {
   publishedOn?: Date;
   lastUpdated?: Date;
   links?: ProjectLink[];
+  gitHubRepository?: GitHubRepository;
 }
 
 export interface ProjectImage {
@@ -36,4 +39,3 @@ export interface ProjectLink {
   text?: string;
   version?: string;
 }
-

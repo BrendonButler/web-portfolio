@@ -5,11 +5,11 @@ import Button from '../../types/Buttons';
 interface CardProps {
   id: string;
   title?: string;
-  projectType: ProjectType;
   children?: ReactNode;
 }
 
 export interface PreviewCardProps extends CardProps {
+  projectType: ProjectType;
   image?: ProjectImage;
   shortDescription?: string;
   downloadButton?: Button;

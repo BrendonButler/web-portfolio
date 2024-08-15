@@ -3,18 +3,10 @@
     "projectSlug": "shops",
     "type": "GITHUB",
     "logo": "https://hangarcdn.papermc.io/avatars/project/1237.webp?v=1",
-    "title": "Shops (Spigot/Paper)",
     "owner": "BrendonButler",
     "branch": "develop",
     "shortDescription": "Shops is a vanilla-style, command-driven shopping plugin for Spigot Servers.",
-    "url": "https://github.com/BrendonButler/Shops",
     "links": [
-      {
-        "id": "latest-download",
-        "url": "https://github.com/BrendonButler/Shops/releases/latest",
-        "text": "Latest Download (GitHub)",
-        "version": "0.2-BETA"
-      },
       {
         "id": "curseforge",
         "url": "https://www.curseforge.com/minecraft/bukkit-plugins/command-shops",
@@ -33,7 +25,11 @@
         "text": "Sponge (Ore)",
         "version": "0.3-BETA"
       },
-      { "id": "github", "url": "https://www.github.com/BrendonButler/Shops", "text": "GitHub" }
+      {
+        "id": "github",
+        "url": "https://www.github.com/BrendonButler/Shops",
+        "text": "GitHub"
+      }
     ],
     "license": {
       "id": "license",
