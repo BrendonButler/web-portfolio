@@ -8,7 +8,7 @@ import { NotFound, ServerError } from './components/Errors';
 import Navigation from './components/Navigation';
 import Home from './pages/Home';
 import { ThemeProvider } from './contexts/ThemeProvider';
-import { ThemeToggleButton } from './components/Overlay';
+import { Overlay } from './components/Overlay';
 import portrait from './assets/brendon-small.png';
 import Projects from './pages/projects/Projects';
 
@@ -52,7 +52,7 @@ function App() {
   return (
     <ThemeProvider>
       <div className='app'>
-        <ThemeToggleButton />
+        <Overlay socialIconSize={30} />
         <Header />
         <Content />
       </div>
