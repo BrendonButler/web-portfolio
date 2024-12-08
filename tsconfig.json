@@ -16,5 +16,9 @@
     "noEmit": true,
     "jsx": "react-jsx"
   },
-  "include": ["src", "images.d.ts"]
+  "include": [
+    "src",
+    "images.d.ts",
+    "node_modules/cypress/types/cypress-global-vars.d.ts"
+  ]
 }
