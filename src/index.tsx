@@ -9,7 +9,7 @@ import Navigation from './components/Navigation';
 import Home from './pages/Home';
 import { ThemeProvider } from './contexts/ThemeProvider';
 import { Overlay } from './components/Overlay';
-import portrait from './assets/brendon-small.png';
+import portrait from '../public/assets/brendon-small.png';
 import Projects from './pages/projects/Projects';
 
 const Header = function () {

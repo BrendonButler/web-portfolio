@@ -38,6 +38,21 @@
     }
   },
   {
+    "projectSlug": "workwiz",
+    "type": "GITHUB",
+    "logo": "https://www.example.com/workwiz.png",
+    "owner": "BrendonButler",
+    "branch": "main",
+    "shortDescription": "A job simulator for learning and fun!",
+    "links": [
+      {
+        "id": "github",
+        "url": "https://www.github.com/BrendonButler/WorkWiz",
+        "text": "GitHub"
+      }
+    ]
+  },
+  {
     "projectSlug": "project-2",
     "type": "WEBSITE",
     "logo": "https://www.example.com/project2.png",

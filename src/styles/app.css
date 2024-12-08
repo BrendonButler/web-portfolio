@@ -1,5 +1,5 @@
 /* fonts */
-@import url(https://fonts.googleapis.com/css?family=Ubuntu:400,700|Roboto:400,300|Press+Start+2P:400);
+@import url(https://fonts.googleapis.com/css?family=Ubuntu:400,700|Roboto:400,300|Press+Start+2P:400&display=swap);
 
 /* themes */
 @import 'themes/dark.css';
