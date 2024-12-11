@@ -5,7 +5,7 @@ on:
     branches: [develop]
   workflow_dispatch:
 
-run-name: Deploying to S3 and CloudFront
+run-name: Deploying to CloudFront
 
 permissions:
   id-token: write
@@ -33,6 +33,27 @@ jobs:
           aws-region: ${{ secrets.AWS_REGION }}
           role-session-name: ${{ secrets.AWS_ROLE_SESSION_NAME }}
 
+  promote-approval:
+    if: |
+      contains(fromJson('["skipped", "success"]'), needs.deploy.result) &&
+      !contains(needs.*.result, 'failure')
+    needs: [build-and-test, deploy]
+    runs-on: ubuntu-latest
+    environment:
+      name: promote-approval
+    steps:
+      - name: Awaiting Approval
+        run: echo "Please approve the deployment by commenting 'approve' on this issue."
+
+  promote:
+    timeout-minutes: 10
+    if: |
+      always() &&
+      contains(fromJson('["skipped", "success"]'), needs.promote-approval.result) &&
+      !contains(needs.*.result, 'failure')
+    needs: [build-and-test, deploy, promote-approval]
+    runs-on: ubuntu-latest
+    steps:
       - name: Promote Staging to Production
         run: |
           STAGING_CONFIG=$(aws cloudfront get-distribution-config --id ${{ secrets.AWS_CLOUDFRONT_STAGE_DISTRIBUTION_ID }} --output json)
