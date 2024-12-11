@@ -28,7 +28,7 @@ jobs:
     if: |
       contains(fromJson('["skipped", "success"]'), needs.deploy.result) &&
       !contains(needs.*.result, 'failure')
-    needs: [build-and-test, deploy]
+    needs: [build-test-and-stage, deploy]
     runs-on: ubuntu-latest
     environment:
       name: promote-approval
@@ -42,7 +42,7 @@ jobs:
       always() &&
       contains(fromJson('["skipped", "success"]'), needs.promote-approval.result) &&
       !contains(needs.*.result, 'failure')
-    needs: [build-and-test, deploy, promote-approval]
+    needs: [build-test-and-stage, deploy, promote-approval]
     runs-on: ubuntu-latest
     steps:
       - name: Configure AWS credentials
