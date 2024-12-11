@@ -28,17 +28,6 @@ jobs:
     needs: build-and-test
     runs-on: ubuntu-latest
 
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Configure AWS credentials
-        uses: aws-actions/configure-aws-credentials@v4
-        with:
-          aws-region: ${{ secrets.AWS_REGION }}
-          role-to-assume: ${{ secrets.AWS_ROLE_ARN }}
-          role-session-name: ${{ secrets.AWS_ROLE_SESSION_NAME }}
-
   promote-approval:
     if: |
       contains(fromJson('["skipped", "success"]'), needs.deploy.result) &&
@@ -60,6 +49,13 @@ jobs:
     needs: [build-and-test, deploy, promote-approval]
     runs-on: ubuntu-latest
     steps:
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-region: ${{ secrets.AWS_REGION }}
+          role-to-assume: ${{ secrets.AWS_ROLE_ARN }}
+          role-session-name: ${{ secrets.AWS_ROLE_SESSION_NAME }}
+
       - name: Promote Staging to Production
         run: |
           # Get the current ETag values
