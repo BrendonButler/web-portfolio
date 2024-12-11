@@ -62,9 +62,12 @@ jobs:
     steps:
       - name: Promote Staging to Production
         run: |
-          STAGING_CONFIG=$(aws cloudfront get-distribution-config --id ${{ secrets.AWS_CLOUDFRONT_STAGE_DISTRIBUTION_ID }} --output json)
-          ETAG=$(echo $STAGING_CONFIG | jq -r '.ETag')
-          DISTRIBUTION_CONFIG=$(echo $STAGING_CONFIG | jq '.DistributionConfig')
-          aws cloudfront update-distribution --id ${{ secrets.AWS_CLOUDFRONT_DISTRIBUTION_ID }} \
-            --distribution-config "$DISTRIBUTION_CONFIG" \
-            --if-match $ETAG
+          # Get the current ETag values
+          STAGING_ETAG=$(aws cloudfront get-distribution --id ${{ secrets.AWS_CLOUDFRONT_STAGE_DISTRIBUTION_ID }} --query 'ETag' --output text)
+          PRIMARY_ETAG=$(aws cloudfront get-distribution --id ${{ secrets.AWS_CLOUDFRONT_DISTRIBUTION_ID }} --query 'ETag' --output text)
+
+          # Update the primary distribution with the staging configuration
+          aws cloudfront update-distribution-with-staging-config \
+            --id ${{ secrets.AWS_CLOUDFRONT_DISTRIBUTION_ID }} \
+            --staging-distribution-id ${{ secrets.AWS_CLOUDFRONT_STAGE_DISTRIBUTION_ID }} \
+            --if-match "$PRIMARY_ETAG, $STAGING_ETAG"

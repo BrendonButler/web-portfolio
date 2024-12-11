@@ -21,7 +21,6 @@ on:
       AWS_CLOUDFRONT_STAGE_DISTRIBUTION_ID:
         required: true
 
-
 run-name: Building and testing the application
 
 permissions:
@@ -87,13 +86,13 @@ jobs:
         if: inputs.stage == true
         run: |
           # Get the current distribution config
-          aws cloudfront get-distribution-config --id ${{ secrets.AWS_CLOUDFRONT_STAGE_DISTRIBUTION_ID }} > distribution-config.json
-
-          # Extract the ETag
-          ETAG=$(jq -r '.ETag' distribution-config.json)
+          aws cloudfront get-distribution-config --id ${{ secrets.AWS_CLOUDFRONT_STAGE_DISTRIBUTION_ID }} --output yaml > staging-distribution.yaml
 
           # Update the S3 origin path
-          jq '.DistributionConfig.Origins.Items[0].OriginPath = "/prod/${{ github.sha }}"' distribution-config.json > updated-config.json
+          sed -i 's|OriginPath: .*|OriginPath: "/prod/${{ github.sha }}"|' staging-distribution.yaml
+
+          # Rename ETag to IfMatch
+          sed -i 's/ETag:/IfMatch:/' staging-distribution.yaml
 
           # Update the distribution
-          aws cloudfront update-distribution --id ${{ secrets.AWS_CLOUDFRONT_STAGE_DISTRIBUTION_ID }} --distribution-config file://updated-config.json --if-match $ETAG
+          aws cloudfront update-distribution --id ${{ secrets.AWS_CLOUDFRONT_STAGE_DISTRIBUTION_ID }} --cli-input-yaml file://staging-distribution.yaml
