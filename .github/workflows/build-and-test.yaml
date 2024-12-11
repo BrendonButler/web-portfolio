@@ -52,8 +52,8 @@ jobs:
         if: inputs.stage == true
         uses: aws-actions/configure-aws-credentials@v4
         with:
+          aws-region: us-east-1
           role-to-assume: ${{ secrets.AWS_ROLE_ARN }}
-          aws-region: ${{ secrets.AWS_REGION }}
           role-session-name: ${{ secrets.AWS_ROLE_SESSION_NAME }}
 
       - name: Sync S3 bucket
