@@ -2,13 +2,10 @@ name: Deploy
 
 on:
   push:
-    branches: [ develop ]
+    branches: [develop]
   workflow_dispatch:
 
 run-name: Deploying to S3 and CloudFront
-
-env:
-  AWS_REGION: ${{ secrets.AWS_REGION }}
 
 permissions:
   id-token: write
@@ -18,9 +15,10 @@ jobs:
   build-and-test:
     name: Build and Test
     uses: ./.github/workflows/build-and-test.yaml
+    with:
+      stage: true
 
   deploy:
-    name: Deploy
     needs: build-and-test
     runs-on: ubuntu-latest
 
@@ -32,11 +30,14 @@ jobs:
         uses: aws-actions/configure-aws-credentials@v4
         with:
           role-to-assume: ${{ secrets.AWS_ROLE_ARN }}
-          aws-region: ${{ env.AWS_REGION }}
-          role-session-name: ${{ secrest.AWS_ROLE_SESSION_NAME  }}
+          aws-region: ${{ secrets.AWS_REGION }}
+          role-session-name: ${{ secrets.AWS_ROLE_SESSION_NAME }}
 
-      - name: Sync S3 bucket
-        run: aws s3 sync dist/ s3://${{ secrets.AWS_S3_BUCKET }} --delete
-
-      - name: Create CloudFront invalidation
-        run: aws cloudfront create-invalidation --distribution-id ${{ secrets.AWS_CLOUDFRONT_DISTRIBUTION_ID }} --paths "/*"
+      - name: Promote Staging to Production
+        run: |
+          STAGING_CONFIG=$(aws cloudfront get-distribution-config --id ${{ secrets.AWS_CLOUDFRONT_STAGE_DISTRIBUTION_ID }} --output json)
+          ETAG=$(echo $STAGING_CONFIG | jq -r '.ETag')
+          DISTRIBUTION_CONFIG=$(echo $STAGING_CONFIG | jq '.DistributionConfig')
+          aws cloudfront update-distribution --id ${{ secrets.AWS_CLOUDFRONT_DISTRIBUTION_ID }} \
+            --distribution-config "$DISTRIBUTION_CONFIG" \
+            --if-match $ETAG

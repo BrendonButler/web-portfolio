@@ -2,9 +2,13 @@ name: Build and Test
 
 on:
   pull_request:
-    branches: [ main, develop]
+    branches: [main, develop]
   workflow_dispatch:
   workflow_call:
+    inputs:
+      stage:
+        required: false
+        type: boolean
 
 run-name: Building and testing the application
 
@@ -15,6 +19,9 @@ jobs:
   build-and-test:
     name: Build and Test
     runs-on: ubuntu-latest
+
+    outputs:
+      commit_sha: ${{ steps.get-sha.outputs.commit_sha }}
 
     steps:
       - name: Checkout code
@@ -35,3 +42,45 @@ jobs:
         uses: cypress-io/github-action@v6
         with:
           component: true
+
+      - name: Get Commit SHA
+        id: get-sha
+        run: echo "commit_sha=${GITHUB_SHA}" >> $GITHUB_ENV
+
+      - name: Configure AWS credentials
+        if: inputs.stage == 'true'
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ secrets.AWS_ROLE_ARN }}
+          aws-region: ${{ env.AWS_REGION }}
+          role-session-name: ${{ secrets.AWS_ROLE_SESSION_NAME }}
+
+      - name: Sync S3 bucket
+        if: inputs.stage == 'true'
+        run: |
+          if aws s3 ls "s3://${{ secrets.AWS_S3_BUCKET }}/builds/${{ github.sha }}/" | grep -q 'PRE'; then
+            echo "Build already exists, skipping upload"
+          else
+            aws s3 sync dist/ "s3://${{ secrets.AWS_S3_BUCKET }}/builds/${{ github.sha }}/" --delete
+            if [ $? -eq 0 ]; then
+              echo "Successfully uploaded build to S3"
+            else
+              echo "Failed to upload build to S3"
+              exit 1
+            fi
+          fi
+
+      - name: Update Staging Distribution
+        if: inputs.stage == 'true'
+        run: |
+          # Get the current distribution config
+          aws cloudfront get-distribution-config --id ${{ secrets.AWS_CLOUDFRONT_STAGE_DISTRIBUTION_ID }} > distribution-config.json
+
+          # Extract the ETag
+          ETAG=$(jq -r '.ETag' distribution-config.json)
+
+          # Update the S3 origin path
+          jq '.DistributionConfig.Origins.Items[0].OriginPath = "/builds/${{ github.sha }}"' distribution-config.json > updated-config.json
+
+          # Update the distribution
+          aws cloudfront update-distribution --id ${{ secrets.AWS_CLOUDFRONT_STAGE_DISTRIBUTION_ID }} --distribution-config file://updated-config.json --if-match $ETAG
