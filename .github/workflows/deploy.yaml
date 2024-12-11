@@ -25,6 +25,7 @@ jobs:
       AWS_CLOUDFRONT_STAGE_DISTRIBUTION_ID: ${{ secrets.AWS_CLOUDFRONT_STAGE_DISTRIBUTION_ID }}
 
   promote-approval:
+    name: Promote Approval
     if: |
       contains(fromJson('["skipped", "success"]'), needs.build-test-and-stage.result) &&
       !contains(needs.*.result, 'failure')
@@ -37,6 +38,7 @@ jobs:
         run: echo "Please approve the deployment by commenting 'approve' on this issue."
 
   promote:
+    name: Promote to Production
     timeout-minutes: 30
     if: |
       always() &&

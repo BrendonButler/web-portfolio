@@ -70,7 +70,7 @@ jobs:
       - name: Sync S3 bucket
         if: inputs.stage == true
         run: |
-          if aws s3 ls "s3://${{ secrets.AWS_S3_BUCKET_NAME }}/prod/${{ github.sha }}/" | grep -q 'PRE'; then
+          if aws s3 ls "s3://${{ secrets.AWS_S3_BUCKET_NAME }}/prod/${{ github.sha }}/" 2>/dev/null | grep -q 'PRE'; then
             echo "Build already exists, skipping upload"
           else
             aws s3 sync dist/ "s3://${{ secrets.AWS_S3_BUCKET_NAME }}/prod/${{ github.sha }}/" --delete
