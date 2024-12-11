@@ -17,6 +17,12 @@ jobs:
     uses: ./.github/workflows/build-and-test.yaml
     with:
       stage: true
+    secrets:
+      AWS_ROLE_ARN: ${{ secrets.AWS_ROLE_ARN }}
+      AWS_REGION: ${{ secrets.AWS_REGION }}
+      AWS_ROLE_SESSION_NAME: ${{ secrets.AWS_ROLE_SESSION_NAME }}
+      AWS_S3_BUCKET: ${{ secrets.AWS_S3_BUCKET }}
+      AWS_CLOUDFRONT_STAGE_DISTRIBUTION_ID: ${{ secrets.AWS_CLOUDFRONT_STAGE_DISTRIBUTION_ID }}
 
   deploy:
     needs: build-and-test
@@ -29,7 +35,7 @@ jobs:
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v4
         with:
-          aws-region: us-east-1
+          aws-region: ${{ secrets.AWS_REGION }}
           role-to-assume: ${{ secrets.AWS_ROLE_ARN }}
           role-session-name: ${{ secrets.AWS_ROLE_SESSION_NAME }}
 

@@ -9,6 +9,18 @@ on:
       stage:
         required: false
         type: boolean
+    secrets:
+      AWS_ROLE_ARN:
+        required: true
+      AWS_REGION:
+        required: true
+      AWS_ROLE_SESSION_NAME:
+        required: true
+      AWS_S3_BUCKET:
+        required: true
+      AWS_CLOUDFRONT_STAGE_DISTRIBUTION_ID:
+        required: true
+
 
 run-name: Building and testing the application
 
@@ -52,7 +64,7 @@ jobs:
         if: inputs.stage == true
         uses: aws-actions/configure-aws-credentials@v4
         with:
-          aws-region: us-east-1
+          aws-region: ${{ secrets.AWS_REGION }}
           role-to-assume: ${{ secrets.AWS_ROLE_ARN }}
           role-session-name: ${{ secrets.AWS_ROLE_SESSION_NAME }}
 
