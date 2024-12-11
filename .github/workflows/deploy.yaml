@@ -12,8 +12,8 @@ permissions:
   contents: read
 
 jobs:
-  build-and-test:
-    name: Build and Test
+  build-test-and-stage:
+    name: Build, Test and Stage
     uses: ./.github/workflows/build-and-test.yaml
     with:
       stage: true
@@ -23,10 +23,6 @@ jobs:
       AWS_ROLE_SESSION_NAME: ${{ secrets.AWS_ROLE_SESSION_NAME }}
       AWS_S3_BUCKET_NAME: ${{ secrets.AWS_S3_BUCKET_NAME }}
       AWS_CLOUDFRONT_STAGE_DISTRIBUTION_ID: ${{ secrets.AWS_CLOUDFRONT_STAGE_DISTRIBUTION_ID }}
-
-  deploy:
-    needs: build-and-test
-    runs-on: ubuntu-latest
 
   promote-approval:
     if: |
