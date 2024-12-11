@@ -26,7 +26,7 @@ jobs:
 
   promote-approval:
     if: |
-      contains(fromJson('["skipped", "success"]'), needs.deploy.result) &&
+      contains(fromJson('["skipped", "success"]'), needs.build-test-and-stage.result) &&
       !contains(needs.*.result, 'failure')
     needs: [build-test-and-stage]
     runs-on: ubuntu-latest
@@ -37,7 +37,7 @@ jobs:
         run: echo "Please approve the deployment by commenting 'approve' on this issue."
 
   promote:
-    timeout-minutes: 10
+    timeout-minutes: 30
     if: |
       always() &&
       contains(fromJson('["skipped", "success"]'), needs.promote-approval.result) &&
@@ -46,20 +46,89 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Configure AWS credentials
-        uses: aws-actions/configure-aws-credentials@v4
+        uses: aws-actions/configure-aws-credentials@v1
         with:
-          aws-region: ${{ secrets.AWS_REGION }}
-          role-to-assume: ${{ secrets.AWS_ROLE_ARN }}
-          role-session-name: ${{ secrets.AWS_ROLE_SESSION_NAME }}
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-1
+
+      - name: Check Staging Distribution Status
+        id: check-status
+        run: |
+          retry_command() {
+            local max_attempts=3
+            local wait_time=60
+            local attempt=1
+
+            while [ $attempt -le $max_attempts ]; do
+              if "$@"; then
+                return 0
+              else
+                echo "Attempt $attempt failed. Retrying in $wait_time seconds..."
+                sleep $wait_time
+                attempt=$((attempt + 1))
+              fi
+            done
+
+            echo "All $max_attempts attempts failed."
+            return 1
+          }
+
+          check_staging_status() {
+            STATUS=$(aws cloudfront get-distribution --id ${{ secrets.AWS_CLOUDFRONT_STAGE_DISTRIBUTION_ID }} --query 'Distribution.Status' --output text)
+            if [ "$STATUS" = "Deployed" ]; then
+              return 0
+            else
+              return 1
+            fi
+          }
+
+          echo "Checking staging distribution status..."
+          if retry_command check_staging_status; then
+            echo "Staging distribution is ready."
+          else
+            echo "Staging distribution is not in a deployable state after multiple checks"
+            exit 1
+          fi
 
       - name: Promote Staging to Production
+        if: steps.check-status.outcome == 'success'
         run: |
-          # Get the current ETag values
-          STAGING_ETAG=$(aws cloudfront get-distribution --id ${{ secrets.AWS_CLOUDFRONT_STAGE_DISTRIBUTION_ID }} --query 'ETag' --output text)
-          PRIMARY_ETAG=$(aws cloudfront get-distribution --id ${{ secrets.AWS_CLOUDFRONT_DISTRIBUTION_ID }} --query 'ETag' --output text)
+          retry_command() {
+            local max_attempts=3
+            local wait_time=60
+            local attempt=1
 
-          # Update the primary distribution with the staging configuration
-          aws cloudfront update-distribution-with-staging-config \
-            --id ${{ secrets.AWS_CLOUDFRONT_DISTRIBUTION_ID }} \
-            --staging-distribution-id ${{ secrets.AWS_CLOUDFRONT_STAGE_DISTRIBUTION_ID }} \
-            --if-match "$PRIMARY_ETAG, $STAGING_ETAG"
+            while [ $attempt -le $max_attempts ]; do
+              if "$@"; then
+                return 0
+              else
+                echo "Attempt $attempt failed. Retrying in $wait_time seconds..."
+                sleep $wait_time
+                attempt=$((attempt + 1))
+              fi
+            done
+
+            echo "All $max_attempts attempts failed."
+            return 1
+          }
+
+          promote_to_production() {
+            # Get the current ETag values
+            STAGING_ETAG=$(aws cloudfront get-distribution --id ${{ secrets.AWS_CLOUDFRONT_STAGE_DISTRIBUTION_ID }} --query 'ETag' --output text)
+            PRIMARY_ETAG=$(aws cloudfront get-distribution --id ${{ secrets.AWS_CLOUDFRONT_DISTRIBUTION_ID }} --query 'ETag' --output text)
+
+            # Update the primary distribution with the staging configuration
+            aws cloudfront update-distribution-with-staging-config \
+              --id ${{ secrets.AWS_CLOUDFRONT_DISTRIBUTION_ID }} \
+              --staging-distribution-id ${{ secrets.AWS_CLOUDFRONT_STAGE_DISTRIBUTION_ID }} \
+              --if-match "$PRIMARY_ETAG, $STAGING_ETAG"
+          }
+
+          echo "Promoting staging distribution to production..."
+          if retry_command promote_to_production; then
+            echo "Promotion to production successful"
+          else
+            echo "Promotion to production failed after multiple attempts"
+            exit 1
+          fi
