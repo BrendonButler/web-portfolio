@@ -16,7 +16,7 @@ on:
         required: true
       AWS_ROLE_SESSION_NAME:
         required: true
-      AWS_S3_BUCKET:
+      AWS_S3_BUCKET_NAME:
         required: true
       AWS_CLOUDFRONT_STAGE_DISTRIBUTION_ID:
         required: true
@@ -71,10 +71,10 @@ jobs:
       - name: Sync S3 bucket
         if: inputs.stage == true
         run: |
-          if aws s3 ls "s3://${{ secrets.AWS_S3_BUCKET }}/builds/${{ github.sha }}/" | grep -q 'PRE'; then
+          if aws s3 ls "s3://${{ secrets.AWS_S3_BUCKET_NAME }}/prod/${{ github.sha }}/" | grep -q 'PRE'; then
             echo "Build already exists, skipping upload"
           else
-            aws s3 sync dist/ "s3://${{ secrets.AWS_S3_BUCKET }}/builds/${{ github.sha }}/" --delete
+            aws s3 sync dist/ "s3://${{ secrets.AWS_S3_BUCKET_NAME }}/prod/${{ github.sha }}/" --delete
             if [ $? -eq 0 ]; then
               echo "Successfully uploaded build to S3"
             else
@@ -93,7 +93,7 @@ jobs:
           ETAG=$(jq -r '.ETag' distribution-config.json)
 
           # Update the S3 origin path
-          jq '.DistributionConfig.Origins.Items[0].OriginPath = "/builds/${{ github.sha }}"' distribution-config.json > updated-config.json
+          jq '.DistributionConfig.Origins.Items[0].OriginPath = "/prod/${{ github.sha }}"' distribution-config.json > updated-config.json
 
           # Update the distribution
           aws cloudfront update-distribution --id ${{ secrets.AWS_CLOUDFRONT_STAGE_DISTRIBUTION_ID }} --distribution-config file://updated-config.json --if-match $ETAG
