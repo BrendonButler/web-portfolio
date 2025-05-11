@@ -1,6 +1,6 @@
 import { Fragment } from 'react';
 
-function Home() {
+const Home = () => {
   return (
     <Fragment>
       <p>Welcome home :)</p>

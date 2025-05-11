@@ -1,4 +1,4 @@
-import { SideCardProps } from './Cards';
+import type { SideCardProps } from './Cards';
 
 const SideCard = ({ props, children }: { props: SideCardProps; children?: React.ReactNode }) => {
   return (

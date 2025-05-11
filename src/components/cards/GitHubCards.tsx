@@ -1,5 +1,5 @@
-import { SideCardProps } from './Cards';
-import { GitHubRepository } from '../../types/GitHubProjects';
+import type { SideCardProps } from './Cards';
+import type { GitHubRepository } from '../../types/GitHubProjects';
 import React from 'react';
 
 export interface GitHubCardProps extends SideCardProps {

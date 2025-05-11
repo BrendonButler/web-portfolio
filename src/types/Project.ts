@@ -1,4 +1,4 @@
-import { GitHubRepository } from './GitHubProjects';
+import type { GitHubRepository } from './GitHubProjects';
 
 export enum ProjectType {
   GITHUB = 'GITHUB',

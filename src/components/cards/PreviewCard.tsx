@@ -1,4 +1,4 @@
-import { PreviewCardProps } from './Cards';
+import type { PreviewCardProps } from './Cards';
 
 const PreviewCard = (props: PreviewCardProps) => {
   return (

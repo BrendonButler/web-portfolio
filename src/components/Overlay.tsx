@@ -1,7 +1,7 @@
 import '../styles/components.less';
 import React from 'react';
 import { Theme, ThemeContext } from '../contexts/ThemeProvider';
-import SocialIcon, { SocialIconType } from './socials/SocialIcon';
+import SocialIcon, { type SocialIconType } from './socials/SocialIcon';
 import linkedInPath from '../../public/assets/socials/linkedin.png';
 
 export const ThemeToggleButton: React.FC = () => {

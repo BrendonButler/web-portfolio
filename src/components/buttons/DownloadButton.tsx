@@ -1,4 +1,4 @@
-import Button from '../../types/Buttons';
+import type Button from '../../types/Buttons';
 
 const DownloadButton = ({ button }: { button: Button }) => {
   const buttonClass: string = `button ${button.class || ''} ${button.active ? '' : 'inactive'}`;

@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import { BrowserRouter as Router, Routes as Switch, Route, useLocation } from 'react-router-dom';
+import { BrowserRouter as Router, Routes as Switch, Route, useLocation } from 'react-router';
 import 'normalize.css/normalize.css';
 import './styles/app.css';
 import './styles/components.less';

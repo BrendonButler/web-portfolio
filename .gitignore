@@ -1,0 +1,9 @@
+/* IDE files */
+/.idea
+
+/* generated */
+/dist
+/node_modules
+
+/* testing */
+/cypress/screenshots/

@@ -1,4 +1,4 @@
-import { HeaderCardProps } from './Cards';
+import type { HeaderCardProps } from './Cards';
 
 const HeaderCard = ({
   props,

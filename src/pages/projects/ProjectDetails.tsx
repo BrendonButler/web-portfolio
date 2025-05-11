@@ -1,11 +1,12 @@
 import React from 'react';
-import Project, { ProjectLink } from '../../types/Project';
 import MainCard from '../../components/cards/MainCard';
 import HeaderCard from '../../components/cards/HeaderCard';
-import Button from '../../types/Buttons';
 import DownloadButton from '../../components/buttons/DownloadButton';
 import SideCard from '../../components/cards/SideCard';
 import { GitHubRepoDetailsSideCard } from '../../components/cards/GitHubCards';
+import type Project from '../../types/Project';
+import type { ProjectLink } from '../../types/Project';
+import type Button from '../../types/Buttons';
 
 function ProjectDetails({
   project,

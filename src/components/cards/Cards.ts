@@ -1,6 +1,6 @@
-import { ReactNode } from 'react';
-import { ProjectImage, ProjectLink, ProjectType } from '../../types/Project';
-import Button from '../../types/Buttons';
+import type { ReactNode } from 'react';
+import type { ProjectImage, ProjectLink, ProjectType } from '../../types/Project';
+import type Button from '../../types/Buttons';
 
 interface CardProps {
   id: string;

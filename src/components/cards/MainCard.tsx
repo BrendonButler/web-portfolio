@@ -1,8 +1,8 @@
-import { MainCardProps } from './Cards';
-import { ReactNode } from 'react';
+import type { MainCardProps } from './Cards';
+import type { ReactNode } from 'react';
+import type Project from '../../types/Project';
 import rehypeRaw from 'rehype-raw';
 import ReactMarkdown from 'react-markdown';
-import Project from '../../types/Project';
 
 const MainCard = ({
   props,

@@ -1,4 +1,5 @@
-import Project, { ProjectImage, ProjectLink, ProjectType } from './Project';
+import type Project from './Project';
+import type { ProjectImage, ProjectLink, ProjectType } from './Project';
 
 interface OwnerResponse {
   login: string;
