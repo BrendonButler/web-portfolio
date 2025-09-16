@@ -28,6 +28,38 @@ function ProjectDetails({
     onClick: () => window.open(downloadLink.url, '_blank', 'noopener noreferrer')
   };
 
+  const sideCards = [
+    project.gitHubRepository && (
+      <GitHubRepoDetailsSideCard
+        key='github'
+        props={{
+          id: project.projectSlug,
+          repository: project.gitHubRepository
+        }}
+      />
+    ),
+    project.links && (
+      <SideCard
+        key='links'
+        props={{
+          id: project.projectSlug,
+          title: 'Additional Links'
+        }}>
+        <ul>
+          {project.links
+            ?.filter((link: ProjectLink): boolean => link.id !== 'latest-download')
+            .map((link: ProjectLink, index: number) => (
+              <li key={index}>
+                <a href={link.url} target='_blank' rel='noopener noreferrer'>
+                  {link.text || link.id}
+                </a>
+              </li>
+            ))}
+        </ul>
+      </SideCard>
+    )
+  ].filter(Boolean);
+
   return (
     <div id='project'>
       <HeaderCard
@@ -43,13 +75,13 @@ function ProjectDetails({
         }}
         selectProject={selectProject}>
         {downloadButton && (
-          <div className={'project-card-links'}>
+          <div className='project-card-links'>
             <DownloadButton button={downloadButton} />
           </div>
         )}
       </HeaderCard>
 
-      <div id={'project-panel'}>
+      <div id='project-panel'>
         <MainCard
           props={{
             id: project.projectSlug,
@@ -59,36 +91,7 @@ function ProjectDetails({
           project={project}
         />
 
-        <aside className='side-cards'>
-          {project.gitHubRepository && (
-            <GitHubRepoDetailsSideCard
-              props={{
-                id: project.projectSlug,
-                repository: project.gitHubRepository
-              }}
-            />
-          )}
-
-          {project.links && (
-            <SideCard
-              props={{
-                id: project.projectSlug,
-                title: 'Additional Links'
-              }}>
-              <ul>
-                {project.links
-                  ?.filter((link: ProjectLink): boolean => link.id !== 'latest-download')
-                  .map((link: ProjectLink, index: number) => (
-                    <li key={index}>
-                      <a href={link.url} target='_blank' rel='noopener noreferrer'>
-                        {link.text || link.id}
-                      </a>
-                    </li>
-                  ))}
-              </ul>
-            </SideCard>
-          )}
-        </aside>
+        {sideCards.length > 0 && <aside className='side-cards'>{sideCards}</aside>}
       </div>
     </div>
   );

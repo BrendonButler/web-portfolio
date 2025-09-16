@@ -3,8 +3,8 @@ import { useCallback, useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router';
 import type Project from '../../types/Project';
 import GitHubProject from '../../types/GitHubProjects';
-import PreviewCard from '../../components/cards/PreviewCard';
 import ProjectDetails from './ProjectDetails';
+import PreviewCard from '../../components/cards/PreviewCard';
 
 function Projects() {
   const [projects, setProjects] = useState<Project[]>([]);

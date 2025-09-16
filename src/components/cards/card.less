@@ -1,0 +1,28 @@
+.card {
+  padding: 16px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+  height: 100%;
+  /* use sans font */
+  background-color: var(--card-bg-color, #fff);
+  border-radius: var(--card-border-radius, 8px);
+  box-shadow: var(--card-box-shadow, 0 2px 4px rgba(0, 0, 0, 0.1));
+  overflow: hidden;
+}
+
+.card-header {
+  margin: 0;
+  font-weight: bold;
+  font: var(--font-family, 'Playfair Display', serif);
+  font-size: 1.2em;
+}
+
+.card-body {
+  flex: 1;
+  font-size: 1em;
+  color: var(--card-text-color, #333);
+  font-family: var(--font-family, 'Roboto', sans-serif);
+}

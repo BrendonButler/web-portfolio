@@ -26,7 +26,7 @@
   }
 }
 
-.preview-card {
+.preview-card .card-body {
   display: flex;
   flex-direction: row;
   gap: 10px;
@@ -88,7 +88,6 @@
 
 .header-card {
   display: flex;
-  gap: 10px;
   width: 100%;
   padding: 10px;
   background-color: var(--background-color-lighter-alt);
@@ -99,47 +98,52 @@
     background-color 0.5s ease-in-out,
     border 0.5s ease-in-out;
 
-  img {
-    max-width: 100px;
-    pointer-events: none;
-  }
-
-  .project-card-info {
-    flex-grow: 1;
-
-    p {
-      margin: 0;
-    }
-  }
-
-  .project-card-links {
+  .card-body {
     display: flex;
-    flex-direction: column;
-    justify-content: center;
-    gap: 5px;
+    gap: 10px;
 
-    #latest-download {
+    img {
+      max-width: 100px;
+      pointer-events: none;
+    }
+
+    .project-card-info {
+      flex-grow: 1;
+
+      p {
+        margin: 0;
+      }
+    }
+
+    .project-card-links {
       display: flex;
       flex-direction: column;
+      justify-content: center;
       gap: 5px;
-      align-items: center;
-      background-color: var(--link-color);
-      border-radius: 5px;
-      box-shadow: 0 0 5px var(--drop-shadow);
-      padding: 5px;
-      color: var(--text-color-header);
 
-      &:hover {
-        background-color: var(--link-color-hover);
-      }
+      #latest-download {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+        align-items: center;
+        background-color: var(--link-color);
+        border-radius: 5px;
+        box-shadow: 0 0 5px var(--drop-shadow);
+        padding: 5px;
+        color: var(--text-color-header);
 
-      .button-text {
-        font-weight: bold;
-      }
+        &:hover {
+          background-color: var(--link-color-hover);
+        }
 
-      .button-subtext {
-        font-weight: lighter;
-        font-size: 0.8em;
+        .button-text {
+          font-weight: bold;
+        }
+
+        .button-subtext {
+          font-weight: lighter;
+          font-size: 0.8em;
+        }
       }
     }
   }

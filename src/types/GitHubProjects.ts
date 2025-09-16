@@ -143,8 +143,8 @@ class GitHubProject implements Project, GitHubProjectProps {
       .then((response: Response) => response.json())
       .then((data: GitHubRepositoryResponse) => {
         const license: License = {
-          name: data.license.name,
-          shortHand: data.license.spdx_id,
+          name: data.license?.name,
+          shortHand: data.license?.spdx_id,
           url: `${this.getProjectBranchLink()}/LICENSE`
         };
         const owner: Owner = {
