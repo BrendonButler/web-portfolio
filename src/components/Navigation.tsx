@@ -9,6 +9,7 @@ function Navigation() {
   const links: LinkType[] = [
     { path: '/', value: 'Home' },
     { path: '/projects', value: 'View my projects' },
+    { path: '/games', value: 'Games' },
     { path: '/about', value: 'About me' }
   ];
 

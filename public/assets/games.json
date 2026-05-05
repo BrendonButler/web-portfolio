@@ -1,0 +1,16 @@
+[
+  {
+    "slug": "scramble",
+    "title": "Scramble",
+    "shortDescription": "A top-down arena survival game. Dodge and shoot enemies as long as you can.",
+    "engine": "Godot 4",
+    "version": "1.0.0",
+    "embedPath": "/games/scramble/Scramble.html",
+    "aspectRatio": "16/9",
+    "controls": [
+      "Arrow keys or WASD to move",
+      "Left click to shoot"
+    ],
+    "releaseDate": "2026-05-04"
+  }
+]

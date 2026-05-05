@@ -11,6 +11,8 @@ import { ThemeProvider } from './contexts/ThemeProvider';
 import { Overlay } from './components/Overlay';
 import portrait from '../public/assets/brendon-small.png';
 import Projects from './pages/projects/Projects';
+import Games from './pages/games/Games';
+import GameDetails from './pages/games/GameDetails';
 
 const Header = function () {
   const { pathname } = useLocation();
@@ -40,6 +42,8 @@ const Content = function () {
         {/* Page routes */}
         <Route index path='/' element={<Home />} />
         <Route index path='/projects' element={<Projects />} />
+        <Route path='/games' element={<Games />} />
+        <Route path='/games/:slug' element={<GameDetails />} />
         {/* Error pages */}
         <Route path='/500' element={<ServerError />} />
         <Route path='*' element={<NotFound />} />
