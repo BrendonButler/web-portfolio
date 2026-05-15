@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: web-portfolio-dev
+  labels:
+    app.kubernetes.io/name: web-portfolio
+    app.kubernetes.io/component: dev-environment
+    environment: development

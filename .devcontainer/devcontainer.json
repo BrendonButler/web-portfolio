@@ -1,0 +1,97 @@
+{
+  // ────────────────────────────────────────────────────────────────────────────
+  // web-portfolio — Dev Container Configuration
+  //
+  // Compatible with:
+  //   • IntelliJ IDEA (2024.1+) via the Dev Containers plugin
+  //   • IntelliJ Gateway for remote/K8s dev
+  //   • VS Code (Dev Containers extension) — works out of the box
+  //
+  // For Kubernetes-based development, see k8s/dev/ and k8s/scripts/.
+  // ────────────────────────────────────────────────────────────────────────────
+  "name": "web-portfolio",
+
+  // Build from the local Dockerfile rather than pulling a generic image.
+  // This keeps the dev environment reproducible and auditable in the repo.
+  "build": {
+    "dockerfile": "Dockerfile",
+    "context": "..",
+    "args": {}
+  },
+
+  // ── Port Forwarding ─────────────────────────────────────────────────────────
+  // Ports are automatically forwarded from the container to localhost.
+  "forwardPorts": [5173, 4173, 6006],
+  "portsAttributes": {
+    "5173": {
+      "label": "Vite Dev Server",
+      "onAutoForward": "notify"
+    },
+    "4173": {
+      "label": "Vite Preview",
+      "onAutoForward": "silent"
+    },
+    "6006": {
+      "label": "Storybook",
+      "onAutoForward": "notify"
+    }
+  },
+
+  // ── Mounts ──────────────────────────────────────────────────────────────────
+  // Cache node_modules in a named volume so npm ci is fast after the first run.
+  // The workspace itself is mounted at /workspace by the container runtime.
+  "mounts": [
+    {
+      "source": "web-portfolio-node-modules",
+      "target": "/workspace/node_modules",
+      "type": "volume"
+    }
+  ],
+
+  // ── Lifecycle Hooks ─────────────────────────────────────────────────────────
+  "postCreateCommand": "bash .devcontainer/scripts/post-create.sh",
+
+  // ── Remote User ─────────────────────────────────────────────────────────────
+  // Always develop as the non-root 'node' user (UID 1000).
+  "remoteUser": "node",
+
+  // ── Container Environment ───────────────────────────────────────────────────
+  // NODE_ENV=development ensures tooling behaves correctly.
+  // VITE_HOST exposes the dev server on all interfaces so port-forwarding works.
+  "remoteEnv": {
+    "NODE_ENV": "development"
+  },
+
+  // ── IDE / Editor Customizations ─────────────────────────────────────────────
+  "customizations": {
+    // ── JetBrains (IntelliJ IDEA / Gateway) ───────────────────────────────────
+    // 'backend' tells JetBrains Gateway which IDE to launch in the container.
+    // Use "IntelliJIdea" for IntelliJ IDEA Ultimate, or "WebStorm" if you
+    // prefer WebStorm for this TypeScript/React project — both work identically.
+    "jetbrains": {
+      "backend": "IntelliJIdea"
+    },
+
+    // ── VS Code (optional, kept for flexibility) ───────────────────────────────
+    "vscode": {
+      "extensions": [
+        "dbaeumer.vscode-eslint",
+        "esbenp.prettier-vscode",
+        "bradlc.vscode-tailwindcss"
+      ],
+      "settings": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
+        "editor.formatOnSave": true,
+        "typescript.tsdk": "node_modules/typescript/lib"
+      }
+    }
+  },
+
+  // ── Features ────────────────────────────────────────────────────────────────
+  // Devcontainer features are composable add-ons. Add kubectl/helm here if you
+  // want them available inside the container for cluster interaction.
+  "features": {
+    // Gives the container user a proper git credential helper.
+    "ghcr.io/devcontainers/features/git:1": {}
+  }
+}

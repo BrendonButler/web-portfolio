@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: node-modules-cache
+  namespace: web-portfolio-dev
+  labels:
+    app.kubernetes.io/name: web-portfolio
+    app.kubernetes.io/component: dev-environment
+spec:
+  # 'standard' is the default StorageClass for minikube (hostPath-backed).
+  # For a real cluster, replace with your preferred StorageClass.
+  storageClassName: standard
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      # node_modules for a typical React/Vite project sits around 300–500 MB.
+      storage: 2Gi

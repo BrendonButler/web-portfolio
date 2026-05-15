@@ -1,0 +1,105 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: web-portfolio-dev
+  namespace: web-portfolio-dev
+  labels:
+    app.kubernetes.io/name: web-portfolio
+    app.kubernetes.io/component: dev-environment
+spec:
+  # Single replica — this is a personal dev pod, not a scaled service.
+  replicas: 1
+  selector:
+    matchLabels:
+      app: web-portfolio-dev
+  template:
+    metadata:
+      labels:
+        app: web-portfolio-dev
+        app.kubernetes.io/name: web-portfolio
+        app.kubernetes.io/component: dev-environment
+    spec:
+      # ── Security: Pod-level ────────────────────────────────────────────────
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1000    # matches the 'node' user in the Dockerfile
+        runAsGroup: 1000
+        fsGroup: 1000      # ensures volume mounts are group-writable by 'node'
+        seccompProfile:
+          type: RuntimeDefault
+
+      # ── Volumes ────────────────────────────────────────────────────────────
+      volumes:
+        # Source code — mounted from the host via minikube's host-path sharing.
+        # On macOS, minikube automatically makes /Users available in the VM.
+        # Run `minikube mount <local-path>:/workspace/src` if auto-mount is off.
+        - name: workspace-source
+          hostPath:
+            # Update this path if your repo lives elsewhere.
+            path: /workspace/web-portfolio
+            type: DirectoryOrCreate
+        # node_modules — backed by the PVC so installs survive pod restarts.
+        - name: node-modules-cache
+          persistentVolumeClaim:
+            claimName: node-modules-cache
+
+      containers:
+        - name: devcontainer
+          # Image is built locally and loaded into minikube by setup-local-cluster.sh.
+          # The :dev tag distinguishes this from any production image.
+          image: web-portfolio-devcontainer:dev
+          imagePullPolicy: Never  # Always use the locally-loaded image
+
+          # Override the default ENTRYPOINT to keep the container alive.
+          # IntelliJ Gateway / SSH will connect to this running container.
+          command: ["sleep", "infinity"]
+
+          ports:
+            - name: vite-dev
+              containerPort: 5173
+              protocol: TCP
+            - name: vite-preview
+              containerPort: 4173
+              protocol: TCP
+            - name: storybook
+              containerPort: 6006
+              protocol: TCP
+
+          # ── Environment ───────────────────────────────────────────────────
+          env:
+            - name: NODE_ENV
+              value: development
+
+          # ── Security: Container-level ─────────────────────────────────────
+          securityContext:
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+                - ALL
+            readOnlyRootFilesystem: false  # npm writes to /workspace and tmp
+
+          # ── Volume Mounts ─────────────────────────────────────────────────
+          volumeMounts:
+            - name: workspace-source
+              mountPath: /workspace
+            - name: node-modules-cache
+              mountPath: /workspace/node_modules
+
+          # ── Resource Limits ───────────────────────────────────────────────
+          # Sized for a local dev machine. Vite + TypeScript can be memory-hungry.
+          # Adjust based on your hardware.
+          resources:
+            requests:
+              cpu: "500m"
+              memory: "512Mi"
+            limits:
+              cpu: "2000m"
+              memory: "2Gi"
+
+          # ── Readiness / Liveness ──────────────────────────────────────────
+          # The pod is "ready" when the workspace directory is accessible.
+          readinessProbe:
+            exec:
+              command: ["test", "-d", "/workspace"]
+            initialDelaySeconds: 5
+            periodSeconds: 10

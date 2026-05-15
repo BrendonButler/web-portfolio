@@ -1,0 +1,44 @@
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: web-portfolio-dev-netpol
+  namespace: web-portfolio-dev
+  labels:
+    app.kubernetes.io/name: web-portfolio
+    app.kubernetes.io/component: dev-environment
+spec:
+  podSelector:
+    matchLabels:
+      app: web-portfolio-dev
+
+  policyTypes:
+    - Ingress
+    - Egress
+
+  ingress:
+    # Allow ingress only from the same namespace (e.g., kubectl port-forward)
+    # and from the host network (NodePort access from your workstation).
+    - from:
+        - namespaceSelector:
+            matchLabels:
+              kubernetes.io/metadata.name: web-portfolio-dev
+      ports:
+        - port: 5173
+          protocol: TCP
+        - port: 4173
+          protocol: TCP
+        - port: 6006
+          protocol: TCP
+
+  egress:
+    # Allow egress to the internet for npm installs, git operations, etc.
+    # In a more locked-down environment, restrict this to specific CIDRs
+    # or add an egress proxy instead.
+    - {}  # Allow all egress from the dev pod
+
+    # DNS resolution — required for any outbound name resolution.
+    - ports:
+        - port: 53
+          protocol: UDP
+        - port: 53
+          protocol: TCP
